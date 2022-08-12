@@ -7,7 +7,12 @@
     - [*IntelliJ* no me pone colores bonitos en mi código Q-Q](#intellij-no-me-pone-colores-bonitos-en-mi-código-q-q)
   - [*Git*](#git)
     - [Descargué mi código directo de *GitHub* no se como conectarlo por *Git* al repositorio D,:](#descargué-mi-código-directo-de-github-no-se-como-conectarlo-por-git-al-repositorio-d)
+- [Linux](#linux)
+  - [¿Cómo instalo las herramientas?](#cómo-instalo-las-herramientas)
+- [Mac](#mac)
+  - [¿Cómo instalo las herramientas?](#cómo-instalo-las-herramientas-1)
 - [Windows](#windows)
+  - [¿Cómo instalo las herramientas?](#cómo-instalo-las-herramientas-2)
   - [¿Cuál es la diferencia entre *cmd* y *Powershell*?](#cuál-es-la-diferencia-entre-cmd-y-powershell)
 
 ## Programación
@@ -53,7 +58,23 @@ Ahora comprueben que funciona haciendo:
 git status
 ```
 
+# Linux
+
+## ¿Cómo instalo las herramientas?
+
+Para esto vean las instrucciones de [aquí](Installation.Linux.md)
+
+# Mac
+
+## ¿Cómo instalo las herramientas?
+
+Para esto vean las instrucciones de [aquí](Installation.Mac.md)
+
 # Windows
+
+## ¿Cómo instalo las herramientas?
+
+Para esto vean las instrucciones de [aquí](Installation.Windows.md)
 
 ## ¿Cuál es la diferencia entre *cmd* y *Powershell*?
 
