@@ -43,12 +43,6 @@ Después, pueden reiniciar la terminal y ejecutar:
 java -version
 ```
 
-Luego reiniciamos la terminal y lo probamos:
-
-```bash
-kotlinc -version
-```
-
 ### Scala
 
 Blabla:
