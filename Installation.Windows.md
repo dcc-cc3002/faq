@@ -76,7 +76,7 @@ choco -?
 ### Java
 
 ```powershell
-winget install Azul.Zulu.18.JDK
+choco install openjdk
 refreshenv
 ```
 
