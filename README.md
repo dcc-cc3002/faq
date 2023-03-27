@@ -23,6 +23,9 @@ Sí, pero pregunta antes de hacerlo.
 Puedes utilizar cualquier herramienta que provea el lenguaje, pero si no lo hemos visto en clases te 
 arriesgas a utilizarlo mal; en este caso, es mejor no ocupar una herramienta a ocuparla mal.
 
+### ¿Cómo debo documentar mi código?
+
+Pueden encontrar una guía de cómo documentar [aquí](Docstring.Scala.md).
 
 ## *IntelliJ*
 
