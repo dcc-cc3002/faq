@@ -76,7 +76,7 @@ choco -?
 ### Java
 
 ```powershell
-winget install Azul.Zulu.18.JDK
+choco install openjdk
 refreshenv
 ```
 
@@ -84,24 +84,6 @@ Luego lo prueban haciendo:
 
 ```powershell
 java -version
-```
-
-Es importante que esto retorne la versión 18, si retorna otra versión desinstalen cualquier 
-instalación de Java que tengan e instalen de nuevo con el comando.
-
-### Kotlin
-
-Para instalar el compilador de Kotlin hacemos (desde Powershell como admin):
-
-```powershell
-choco install kotlinc
-refreshenv
-```
-
-Y lo probamos:
-
-```powershell
-kotlinc -version
 ```
 
 ### Scala

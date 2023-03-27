@@ -43,20 +43,6 @@ Después, pueden reiniciar la terminal y ejecutar:
 java -version
 ```
 
-### Kotlin
-
-Similar a como hicimos con Java:
-
-```bash
-sdk install kotlin
-```
-
-Luego reiniciamos la terminal y lo probamos:
-
-```bash
-kotlinc -version
-```
-
 ### Scala
 
 Blabla:
