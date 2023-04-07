@@ -3,6 +3,10 @@
 - [Fpreguntas Afrecuentes Q](#fpreguntas-afrecuentes-q)
   - [Programación](#programación)
     - [Leyendo la documentación del lenguaje encontré algo que no vimos en clases. ¿Lo puedo usar?](#leyendo-la-documentación-del-lenguaje-encontré-algo-que-no-vimos-en-clases-lo-puedo-usar)
+    - [¿Cómo debo documentar mi código?](#cómo-debo-documentar-mi-código)
+  - [Testing](#testing)
+    - [¿Puedo hacer todos los tests en un solo archivo?](#puedo-hacer-todos-los-tests-en-un-solo-archivo)
+    - [¿Cómo organizo mis tests?](#cómo-organizo-mis-tests)
   - [*IntelliJ*](#intellij)
     - [*IntelliJ* no me pone colores bonitos en mi código Q-Q](#intellij-no-me-pone-colores-bonitos-en-mi-código-q-q)
   - [*Git*](#git)
@@ -27,11 +31,13 @@ arriesgas a utilizarlo mal; en este caso, es mejor no ocupar una herramienta a o
 
 Pueden encontrar una guía de cómo documentar [aquí](Docstring.Scala.md).
 
-## ¿Puedo hacer todos los tests en un solo archivo?
+## Testing
+
+### ¿Puedo hacer todos los tests en un solo archivo?
 
 No.
 
-## ¿Cómo organizo mis tests? 
+### ¿Cómo organizo mis tests? 
 
 Algunas buenas prácticas para organizar sus pruebas son las siguientes:
 
@@ -83,7 +89,7 @@ Algunas buenas prácticas para organizar sus pruebas son las siguientes:
               ├── StringTest.scala
               └── StringOpsTest.scala
   ```
-  
+
 5. Agregue comentarios y documentación sólo en casos en que la lógica del test es complicada, un
   nombre descriptivo y conciso para sus tests debiera ser suficiente en la mayoría de los casos.
 
