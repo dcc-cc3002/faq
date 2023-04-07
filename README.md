@@ -27,6 +27,66 @@ arriesgas a utilizarlo mal; en este caso, es mejor no ocupar una herramienta a o
 
 Pueden encontrar una guía de cómo documentar [aquí](Docstring.Scala.md).
 
+## ¿Puedo hacer todos los tests en un solo archivo?
+
+No.
+
+## ¿Cómo organizo mis tests? 
+
+Algunas buenas prácticas para organizar sus pruebas son las siguientes:
+
+1. Utilice una convención de nomenclatura clara y consistente para sus pruebas. 
+  Esto hace que sea fácil entender qué se está probando y encontrar pruebas específicas cuando sea 
+  necesario.
+  Se recomienda nombrar las clases de prueba con el nombre de la clase que se está probando y 
+  agregar el sufijo ``Test``. Por ejemplo, si está probando la clase ``String``, podría llamar a la
+  clase de prueba ``StringTest``.
+  Otros nombres comunes para las clases de prueba son agregar el sufijo ``Spec`` o ``Suite``,
+  por ejemplo, ``StringSpec`` o ``StringSuite``.
+
+2. Agrupe las pruebas relacionadas juntas. 
+  Esto podría ser por clase, módulo o funcionalidad.
+  Se recomienda crear una clase de prueba por cada clase que tenga su implementación.
+  Si tiene una clase con muchas pruebas, puede dividirla en varias clases de prueba.
+  Cada archivo debiera contener una sola clase de prueba.
+
+3. Utilice métodos de configuración y desmontaje para evitar la duplicación de código 
+  (``beforeEach`` y ``afterEach`` en *MUnit*), aunque es probable que no necesite los métodos de
+  desmontaje. 
+  Los métodos de configuración se utilizan para configurar el entorno de prueba y cualquier dato que
+  sea necesario para la prueba, mientras que los métodos de desmontaje se utilizan para limpiar 
+  después de que la prueba esté completa.
+  Al utilizar métodos de configuración y desmontaje, puede evitar duplicar código en varias pruebas.
+
+4. Utilice nombres descriptivos y concisos que expliquen lo que está probando.
+  Por ejemplo, en lugar de escribir algo como ``test("Test constructor")``, utilice algo como 
+  ``test("A String should be created from a Character array")``.
+  Además, separe cada caso de prueba en bloques ``test`` individuales, en lugar de agrupar varios
+  casos de prueba en un solo bloque ``test``.
+
+5. Utilice la misma organización de código que la que utiliza en su implementación.
+  Por ejemplo, si tenemos la siguiente estructura para nuestra implementación:
+  ```
+  src
+  └── main
+      └── scala
+          └── example
+              ├── String.scala
+              └── StringOps.scala
+  ```
+  Entonces, nuestra estructura de pruebas debiera ser:
+  ```
+  src
+  └── test
+      └── scala
+          └── example
+              ├── StringTest.scala
+              └── StringOpsTest.scala
+  ```
+  
+5. Agregue comentarios y documentación sólo en casos en que la lógica del test es complicada, un
+  nombre descriptivo y conciso para sus tests debiera ser suficiente en la mayoría de los casos.
+
 ## *IntelliJ*
 
 ### *IntelliJ* no me pone colores bonitos en mi código Q-Q
