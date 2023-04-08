@@ -90,7 +90,7 @@ Algunas buenas prácticas para organizar sus pruebas son las siguientes:
               └── StringOpsTest.scala
   ```
 
-5. Agregue comentarios y documentación sólo en casos en que la lógica del test es complicada, un
+6. Agregue comentarios y documentación sólo en casos en que la lógica del test es complicada, un
   nombre descriptivo y conciso para sus tests debiera ser suficiente en la mayoría de los casos.
 
 ## *IntelliJ*
