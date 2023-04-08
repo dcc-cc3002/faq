@@ -129,7 +129,7 @@ Ahora comprueben que funciona haciendo:
 git status
 ```
 
-### ¿Cómo creo una rama en *Git*?:
+### ¿Cómo creo una rama en *Git*?
 
 ```bash
 git branch nombreDeLaBranch
@@ -140,6 +140,8 @@ Ahora, para trasladarse a la branch creada, decimos:
 ```bash
 git checkout nombreDeLaBranch
 ```
+
+Para saber en qué rama están actualmente, pueden utilizar el comando git status, y la primera línea les indicará el nombre de la branch en la que se encuentran.
 
 
 ## Linux
