@@ -19,7 +19,7 @@
   - [Windows](#windows)
     - [¿Cómo instalo las herramientas?](#cómo-instalo-las-herramientas-2)
     - [¿Cuál es la diferencia entre *cmd* y *Powershell*?](#cuál-es-la-diferencia-entre-cmd-y-powershell)
-  - [Tarea 1)(#tarea-1)
+  - [Tarea 1](#tarea-1)
 
 ## Programación
 
