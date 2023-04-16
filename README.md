@@ -23,17 +23,34 @@
 
 ## Programación
 
+La programación es una habilidad fundamental en la era digital en la que vivimos, y es especialmente 
+relevante para carreras en tecnología, ciencias de la computación, ingeniería y otros campos 
+relacionados. 
+A continuación, te brindamos algunas preguntas frecuentes y respuestas útiles que pueden ayudarte en
+tu curso de programación:
+
+
+### ¿Cómo debo documentar mi código?
+
+Pueden encontrar una guía de cómo documentar [aquí](Docstring.Scala.md).
+
+### ¿Cómo funcionan los constructores en Scala?
+
+Pueden encontrar una guía de cómo funcionan los constructores en Scala 
+[aquí](Constructores.Scala.md).
+
 ### Leyendo la documentación del lenguaje encontré algo que no vimos en clases. ¿Lo puedo usar?
 
 Sí, pero pregunta antes de hacerlo.
 Puedes utilizar cualquier herramienta que provea el lenguaje, pero si no lo hemos visto en clases te 
 arriesgas a utilizarlo mal; en este caso, es mejor no ocupar una herramienta a ocuparla mal.
 
-### ¿Cómo debo documentar mi código?
-
-Pueden encontrar una guía de cómo documentar [aquí](Docstring.Scala.md).
-
 ## Testing
+
+El testing es una parte crucial de la programación, ya que ayuda a asegurarse de que su código 
+funciona correctamente y cumple con los requisitos del proyecto. 
+En esta sección, se proporcionarán algunas pautas útiles para ayudarlo a organizar y escribir 
+pruebas efectivas.
 
 ### ¿Puedo hacer todos los tests en un solo archivo?
 
