@@ -3,6 +3,7 @@
 - [Fpreguntas Afrecuentes Q](#fpreguntas-afrecuentes-q)
   - [Programación](#programación)
     - [¿Cómo funcionan los constructores en Scala?](#cómo-funcionan-los-constructores-en-scala)
+    - [¿Qué es el método toString?](#qué-es-el-método-tostring)
     - [¿Cómo debo documentar mi código?](#cómo-debo-documentar-mi-código)
     - [Leyendo la documentación del lenguaje encontré algo que no vimos en clases. ¿Lo puedo usar?](#leyendo-la-documentación-del-lenguaje-encontré-algo-que-no-vimos-en-clases-lo-puedo-usar)
   - [Testing](#testing)
@@ -39,6 +40,23 @@ Pueden encontrar una guía de cómo documentar [aquí](Docstring.Scala.md).
 
 Pueden encontrar una guía de cómo funcionan los constructores en Scala 
 [aquí](Constructores.Scala.md).
+
+### ¿Qué es el método toString?
+
+El método ``toString`` es un método en Scala que devuelve un string que representa a un objeto.
+Es usado generalmente para propósitos de debugging y logging, y puede ser sobreescrito para proveer
+una implementación personalizada.
+
+Pueden encontrar una guía de cómo funciona el método ``toString`` [aquí](ToString.Scala.md).
+
+### ¿Qué son los métodos equals y hashCode?
+
+Los métodos ``equals`` y ``hashCode`` son métodos en Scala que se utilizan para comparar dos objetos
+y generar un valor hash para un objeto, respectivamente.
+Estos métodos son comúnmente utilizados en colecciones y estructuras de datos, además de en tests.
+
+Pueden encontrar una guía de cómo funcionan los métodos ``equals`` y ``hashCode``
+[aquí](EqualsHashCode.Scala.md).
 
 ### Leyendo la documentación del lenguaje encontré algo que no vimos en clases. ¿Lo puedo usar?
 
