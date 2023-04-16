@@ -4,6 +4,7 @@
   - [Programación](#programación)
     - [¿Cómo funcionan los constructores en Scala?](#cómo-funcionan-los-constructores-en-scala)
     - [¿Qué es el método toString?](#qué-es-el-método-tostring)
+    - [¿Qué son los métodos equals y hashCode?](#qué-son-los-métodos-equals-y-hashcode)
     - [¿Cómo debo documentar mi código?](#cómo-debo-documentar-mi-código)
     - [Leyendo la documentación del lenguaje encontré algo que no vimos en clases. ¿Lo puedo usar?](#leyendo-la-documentación-del-lenguaje-encontré-algo-que-no-vimos-en-clases-lo-puedo-usar)
   - [Testing](#testing)
