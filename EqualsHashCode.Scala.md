@@ -1,3 +1,20 @@
+# Índice
+
+- [Método equals](#método-equals)
+  - [Igualdad referencial](#igualdad-referencial)
+    - [Igualdad referencial en strings](#igualdad-referencial-en-strings)
+  - [Igualdad estructural](#igualdad-estructural)
+    - [Implementación por defecto](#implementación-por-defecto)
+    - [Sobrescritura de equals](#sobrescritura-de-equals)
+- [Método hashCode](#método-hashcode)
+  - [Implementación por defecto](#implementación-por-defecto-1)
+  - [Sobrescritura de hashCode](#sobrescritura-de-hashcode)
+- [¿Por qué debería sobrescribir hashCode cuando sobrescribo equals?](#por-qué-debería-sobrescribir-hashcode-cuando-sobrescribo-equals)
+- [Referencias](#referencias)
+- [Anexo: Utilizando el método hashCode](#anexo-utilizando-el-método-hashcode)
+  - [Tabla de hashing personalizada](#tabla-de-hashing-personalizada)
+  - [Tabla de hashing usando la librearía estándar de Scala](#tabla-de-hashing-usando-la-librearía-estándar-de-scala)
+
 # Método equals
 
 ## Igualdad referencial

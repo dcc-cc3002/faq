@@ -3,6 +3,8 @@
 El método ``toString`` es un método en _Scala_ que devuelve un string que representa a un objeto. 
 Es usado generalmente para propósitos de debugging y logging, y puede ser sobreescrito para proveer
 una implementación personalizada.
+La mayoría de los lenguajes de programación tienen un método similar, como ``toString`` en _Java_ y
+_Kotlin_, o ``__str__`` en _Python_.
 
 ## Índice
 
