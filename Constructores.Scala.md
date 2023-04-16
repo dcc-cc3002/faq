@@ -519,3 +519,7 @@ a.f()
 ```
 1
 ```
+
+## Referencias
+
+1. Scala Community. “Tools.” Scala Documentation. Accessed April 16, 2023. https://docs.scala-lang.org/scala3/book/domain-modeling-tools.html.
