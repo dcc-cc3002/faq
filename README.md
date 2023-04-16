@@ -2,8 +2,9 @@
 
 - [Fpreguntas Afrecuentes Q](#fpreguntas-afrecuentes-q)
   - [Programación](#programación)
-    - [Leyendo la documentación del lenguaje encontré algo que no vimos en clases. ¿Lo puedo usar?](#leyendo-la-documentación-del-lenguaje-encontré-algo-que-no-vimos-en-clases-lo-puedo-usar)
+    - [¿Cómo funcionan los constructores en Scala?](#cómo-funcionan-los-constructores-en-scala)
     - [¿Cómo debo documentar mi código?](#cómo-debo-documentar-mi-código)
+    - [Leyendo la documentación del lenguaje encontré algo que no vimos en clases. ¿Lo puedo usar?](#leyendo-la-documentación-del-lenguaje-encontré-algo-que-no-vimos-en-clases-lo-puedo-usar)
   - [Testing](#testing)
     - [¿Puedo hacer todos los tests en un solo archivo?](#puedo-hacer-todos-los-tests-en-un-solo-archivo)
     - [¿Cómo organizo mis tests?](#cómo-organizo-mis-tests)
