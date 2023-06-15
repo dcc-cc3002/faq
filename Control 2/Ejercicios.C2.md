@@ -8,6 +8,7 @@ Tabla de contenidos
     - [Programa 2: Base de datos](#programa-2-base-de-datos)
     - [Programa 3: Control de acceso](#programa-3-control-de-acceso)
     - [Programa 4: Sistema de subastas](#programa-4-sistema-de-subastas)
+    - [Programa 5: Sistema de navegación](#programa-5-sistema-de-navegación)
     - [Ejercicio 2: Implementación de patrones de diseño](#ejercicio-2-implementación-de-patrones-de-diseño)
     - [a. Sistema monitor de clima](#a-sistema-monitor-de-clima)
 
@@ -29,11 +30,10 @@ Para los siguientes ejercicios, considere los siguientes patrones de diseño:
 - Template
 - Visitor
 
+_Hint: Cada patrón de diseño se utiliza solo una vez._
+
 Ejercicio 1: Identificación de patrones de diseño
 -------------------------------------------------
-
-Para cada uno de los programas que se presentan a continuación, identifique qué patrón de diseño se 
-está aplicando
 
 ### Programa 1: Interacción entre personajes
 <!-- Double Dispatch -->
@@ -118,15 +118,29 @@ trait Database {
 }
 
 class SQLDatabase extends Database {
-  override def insert(user: User): Unit = ???
-  override def select(id: String): User = ???
-  override def delete(id: String): Unit = ???
+  override def insert(user: User): Unit = {
+    println(s"Inserting user ${user.id} into MySQL database")
+  }
+  override def select(id: String): User = {
+    println(s"Selecting user $id from MySQL database")
+    User(id)
+  }
+  override def delete(id: String): Unit = {
+    println(s"Deleting user $id from MySQL database")
+  }
 }
 
 class MongoDB extends Database {
-  override def insert(user: User): Unit = ???
-  override def select(id: String): User = ???
-  override def delete(id: String): Unit = ???
+  override def insert(user: User): Unit = {
+    println(s"Inserting user ${user.id} into MongoDB")
+  }
+  override def select(id: String): User = {
+    println(s"Selecting user $id from MongoDB")
+    User(id)
+  }
+  override def delete(id: String): Unit = {
+    println(s"Deleting user $id from MongoDB")
+  }
 }
 
 case class User(id: String)
@@ -179,6 +193,21 @@ class AccessControlLayer extends SecureSystem {
     }
   }
 }
+
+val acl = new AccessControlLayer
+
+// Try to access the system with valid and invalid credentials
+val response1 = acl.access("John", "1234")
+println(response1) // Should print: "Access granted for user: John"
+
+val response2 = acl.access("John", "wrong_password")
+println(response2) // Should print: "Access denied"
+
+val response3 = acl.access("Jane", "4321")
+println(response3) // Should print: "Access granted for user: Jane"
+
+val response4 = acl.access("UnknownUser", "1234")
+println(response4) // Should print: "Access denied"
 ```
 
 En este escenario:
@@ -230,6 +259,57 @@ En este escenario:
 1. ¿Qué patrón de diseño se ha utilizado para resolver el problema?
 2. ¿Puede dibujar un diagrama UML que represente la relación entre las diferentes clases e 
   interfaces?
+
+### Programa 5: Sistema de navegación
+<!-- State -->
+
+Considere un sistema de automóvil simplificado donde un automóvil puede estar en uno de los tres 
+modos: estacionado, conduciendo o en reversa.
+El comportamiento del pedal del acelerador cambia según el modo actual del automóvil.
+
+Aquí hay una implementación de ejemplo en Scala:
+
+```scala
+trait CarMode {
+  def accelerate(): Unit
+}
+
+class ParkedMode extends CarMode {
+  override def accelerate(): Unit = {
+    println("Car is parked. Accelerating won't do anything.")
+  }
+}
+
+class DriveMode extends CarMode {
+  override def accelerate(): Unit = {
+    println("Car is in drive mode. Accelerating...")
+  }
+}
+
+class ReverseMode extends CarMode {
+  override def accelerate(): Unit = {
+    println("Car is in reverse mode. Moving backwards...")
+  }
+}
+
+class Car {
+  private var mode: CarMode = new ParkedMode()
+
+  def setMode(newMode: CarMode): Unit = {
+    mode = newMode
+  }
+
+  def accelerate(): Unit = {
+    mode.accelerate()
+  }
+}
+```
+
+En este escenario:
+1. ¿Qué patrón de diseño se ha utilizado para resolver el problema?
+2. ¿Puede dibujar un diagrama UML que represente la relación entre las diferentes clases e 
+  interfaces?
+1. Escriba un método para cambiar el modo del automóvil y luego acelerar.
 
 ### Ejercicio 2: Implementación de patrones de diseño
 
