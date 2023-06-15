@@ -4,18 +4,22 @@ Tabla de contenidos
 - [Tabla de contenidos](#tabla-de-contenidos)
 - [Parte 1: Patrones de diseño](#parte-1-patrones-de-diseño)
   - [Ejercicio 1: Identificación de patrones de diseño](#ejercicio-1-identificación-de-patrones-de-diseño)
-    - [Programa 1: Interacción entre personajes](#programa-1-interacción-entre-personajes)
-    - [Programa 2: Base de datos](#programa-2-base-de-datos)
-    - [Programa 3: Control de acceso](#programa-3-control-de-acceso)
+    - [Programa 1: Base de datos](#programa-1-base-de-datos)
+    - [Programa 2: Control de acceso](#programa-2-control-de-acceso)
+    - [Programa 3: Compartir Recursos en una Galería de Arte](#programa-3-compartir-recursos-en-una-galería-de-arte)
     - [Programa 4: Sistema de subastas](#programa-4-sistema-de-subastas)
-    - [Programa 5: Niveles de juego](#programa-5-niveles-de-juego)
-    - [Programa 6: Procesamiento de datos](#programa-6-procesamiento-de-datos)
-    - [Programa 7: Gestión de tareas](#programa-7-gestión-de-tareas)
-    - [Programa 8: Log Management](#programa-8-log-management)
-    - [Programa 9: Creación de Pinceles](#programa-9-creación-de-pinceles)
+    - [Programa 5: Interacción entre personajes](#programa-5-interacción-entre-personajes)
+    - [Programa 6: Creación de Pinceles](#programa-6-creación-de-pinceles)
+    - [Programa 7: Niveles de juego](#programa-7-niveles-de-juego)
+    - [Programa 8: Procesamiento de datos](#programa-8-procesamiento-de-datos)
+    - [Programa 9: Operaciones Extensibles en Archivos](#programa-9-operaciones-extensibles-en-archivos)
     - [Programa 10: Servicio de Conexión](#programa-10-servicio-de-conexión)
-    - [Ejercicio 2: Implementación de patrones de diseño](#ejercicio-2-implementación-de-patrones-de-diseño)
-    - [a. Sistema monitor de clima](#a-sistema-monitor-de-clima)
+    - [Programa 11: Gestión de tareas](#programa-11-gestión-de-tareas)
+    - [Programa 12: Log Management](#programa-12-log-management)
+  - [Ejercicio 2: Implementación de patrones de diseño](#ejercicio-2-implementación-de-patrones-de-diseño)
+    - [1. Tratamiento de formas geométricas](#1-tratamiento-de-formas-geométricas)
+    - [2. Manejo de usuarios desconocidos](#2-manejo-de-usuarios-desconocidos)
+  - [10. Sistema monitor de clima](#10-sistema-monitor-de-clima)
 
 Parte 1: Patrones de diseño
 ===========================
@@ -40,53 +44,7 @@ _Hint: Cada patrón de diseño se utiliza solo una vez._
 Ejercicio 1: Identificación de patrones de diseño
 -------------------------------------------------
 
-### Programa 1: Interacción entre personajes
-<!-- Double Dispatch -->
-
-En un juego 2D, tenemos diferentes tipos de personajes: un Guerrero y un Mago. 
-Cada personaje puede interactuar con otros, causando diferentes resultados basados en el tipo de los
-personajes involucrados.
-
-```scala
-trait Character {
-  def interactWith(character: Character): Unit
-  def interactWithWarrior(warrior: Warrior): Unit
-  def interactWithMage(mage: Mage): Unit
-}
-
-class Warrior extends Character {
-  override def interactWith(character: Character): Unit = {
-    character.interactWithWarrior(this)
-  }
-
-  override def interactWithWarrior(warrior: Warrior): Unit = {
-    println("Warrior interacts with another Warrior")
-  }
-
-  override def interactWithMage(mage: Mage): Unit = {
-    println("Warrior interacts with a Mage")
-  }
-}
-
-class Mage extends Character {
-  override def interactWith(character: Character): Unit = {
-    character.interactWithMage(this)
-  }
-
-  override def interactWithWarrior(warrior: Warrior): Unit = {
-    println("Mage interacts with a Warrior")
-  }
-
-  override def interactWithMage(mage: Mage): Unit = {
-    println("Mage interacts with another Mage")
-  }
-}
-```
-
-1. Identifique el patrón de diseño que se utiliza para implementar la interacción entre personajes.
-2. Dibuje el diagrama de clases (UML) del programa.
-
-### Programa 2: Base de datos
+### Programa 1: Base de datos
 <!-- Adapter -->
 
 Considere una aplicación que interactúa con varios tipos de bases de datos. 
@@ -149,7 +107,7 @@ case class User(id: String)
   que `MongoDB` sea compatible con el resto de la aplicación?
 2. Dibuje el diagrama de clases (UML) del programa.
 
-### Programa 3: Control de acceso
+### Programa 2: Control de acceso
 <!-- Proxy -->
 
 Considere el siguiente escenario en el que tenemos un objeto que representa un sistema seguro al que
@@ -207,7 +165,42 @@ En este escenario:
 1. ¿Qué patrón de diseño se puede aplicar para resolver el problema?
 2. ¿Puede dibujar un diagrama UML que represente la relación entre las diferentes clases e 
   interfaces?
+### Programa 3: Compartir Recursos en una Galería de Arte
 
+Eres parte del equipo de desarrollo de una aplicación para una galería de arte. 
+La aplicación necesita representar miles de pinturas, muchas de las cuales comparten ciertos 
+atributos como el autor, el estilo o el año en que fueron creadas.
+
+Para optimizar el uso de la memoria, decides compartir estos atributos comunes en lugar de 
+repetirlos en cada pintura.
+Para hacer esto, implementas una fábrica que crea un nuevo objeto solo si no existe ninguno con los
+atributos deseados.
+
+Se te proporciona el siguiente fragmento de código:
+
+```scala
+case class ArtworkAttributes(author: String, style: String, year: Int)
+
+class ArtworkFactory {
+  private val attributesPool = scala.collection.mutable.Map[String, ArtworkAttributes]()
+
+  def getArtworkAttributes(author: String, style: String, year: Int): ArtworkAttributes = {
+    val key = s"$author:$style:$year"
+    attributesPool.getOrElseUpdate(key, ArtworkAttributes(author, style, year))
+  }
+}
+
+class Artwork(val name: String, private val attributes: ArtworkAttributes) {
+  def print(): Unit = {
+    println(s"$name is a ${attributes.style} painting by ${attributes.author} from ${attributes.year}.")
+  }
+}
+```
+
+1. ¿Qué patrón de diseño se está utilizando en este fragmento de código? Explica tu razonamiento.
+2. Dibuja un diagrama UML que refleje el diseño de esta implementación.
+3. Escribe un programa de ejemplo que utilice la clase `ArtworkFactory` para crear varias pinturas, 
+  algunas de las cuales comparten atributos.
 ### Programa 4: Sistema de subastas
 <!-- Observer -->
 
@@ -253,7 +246,90 @@ En este escenario:
 2. ¿Puede dibujar un diagrama UML que represente la relación entre las diferentes clases e 
   interfaces?
 
-### Programa 5: Niveles de juego
+### Programa 5: Interacción entre personajes
+<!-- Double Dispatch -->
+
+En un juego 2D, tenemos diferentes tipos de personajes: un Guerrero y un Mago. 
+Cada personaje puede interactuar con otros, causando diferentes resultados basados en el tipo de los
+personajes involucrados.
+
+```scala
+trait Character {
+  def interactWith(character: Character): Unit
+  def interactWithWarrior(warrior: Warrior): Unit
+  def interactWithMage(mage: Mage): Unit
+}
+
+class Warrior extends Character {
+  override def interactWith(character: Character): Unit = {
+    character.interactWithWarrior(this)
+  }
+
+  override def interactWithWarrior(warrior: Warrior): Unit = {
+    println("Warrior interacts with another Warrior")
+  }
+
+  override def interactWithMage(mage: Mage): Unit = {
+    println("Warrior interacts with a Mage")
+  }
+}
+
+class Mage extends Character {
+  override def interactWith(character: Character): Unit = {
+    character.interactWithMage(this)
+  }
+
+  override def interactWithWarrior(warrior: Warrior): Unit = {
+    println("Mage interacts with a Warrior")
+  }
+
+  override def interactWithMage(mage: Mage): Unit = {
+    println("Mage interacts with another Mage")
+  }
+}
+```
+
+1. Identifique el patrón de diseño que se utiliza para implementar la interacción entre personajes.
+2. Dibuje el diagrama de clases (UML) del programa.
+
+### Programa 6: Creación de Pinceles
+
+Considera el siguiente código en Scala:
+
+```scala
+trait Brush {
+  def paint(): Unit
+}
+
+class OilBrush(val size: Int) extends Brush {
+  override def paint(): Unit = println(s"Pintando con pincel de óleo de tamaño: $size...")
+}
+
+class WaterBrush(val size: Int) extends Brush {
+  override def paint(): Unit = println(s"Pintando con pincel de agua de tamaño: $size...")
+}
+
+trait ArtKit {
+  def createBrush(): Brush
+}
+
+class OilArtKit extends ArtKit {
+  override def createBrush(): Brush = new OilBrush(size)
+}
+
+class WaterArtKit(size: Int) extends ArtKit {
+  override def createBrush(): Brush = new WaterBrush(size)
+}
+```
+
+En este sistema, diferentes tipos de kits de arte necesitan crear diferentes tipos de pinceles. Dependiendo del tipo de kit, se crea y se utiliza un tipo diferente de pincel para pintar. Los pinceles pueden ser de distintos tamaños dependiendo de los parámetros específicos de su kit.
+
+**Preguntas:**
+
+1. Identifica el patrón de diseño utilizado en este fragmento de código.
+2. Dibuja un diagrama UML del sistema.
+
+### Programa 7: Niveles de juego
 
 Considere el siguiente fragmento de código, que representa a un jugador progresando a través de los 
 niveles de un juego.
@@ -299,7 +375,7 @@ class Player(var level: GameLevel = new BeginnerLevel) {
 2. Dibuje un diagrama UML del sistema.
 3. Explique por qué se utiliza este patrón de diseño y cómo beneficia al sistema.
 
-### Programa 6: Procesamiento de datos
+### Programa 8: Procesamiento de datos
 <!-- Template Method -->
 
 Considere el siguiente fragmento de código, que representa un sistema que procesa dos tipos de 
@@ -340,7 +416,80 @@ class NumericDataProcessor extends DataProcessor {
 1. Identifique el patrón de diseño utilizado en este fragmento de código.
 2. Dibuje un diagrama UML del sistema.
 
-### Programa 7: Gestión de tareas
+### Programa 9: Operaciones Extensibles en Archivos
+
+Eres un desarrollador trabajando en una aplicación de manejo de archivos.
+En la aplicación, hay diferentes tipos de archivos, y se espera que en el futuro se puedan agregar 
+más tipos.
+Quieres poder realizar operaciones en estos archivos, pero no quieres cambiar las clases de los 
+archivos cada vez que agregas una nueva operación.
+
+Decides implementar una solución que permita agregar nuevas operaciones sin cambiar las clases de
+los archivos.
+
+Se te proporciona el siguiente fragmento de código:
+
+```scala
+trait FileElement {
+  def accept(operation: FileOperation): Unit
+}
+
+class TextFile(val name: String) extends FileElement {
+  override def accept(operation: FileOperation): Unit = operation.perform(this)
+}
+
+class ImageFile(val name: String) extends FileElement {
+  override def accept(operation: FileOperation): Unit = operation.perform(this)
+}
+
+trait FileOperation {
+  def perform(file: TextFile): Unit
+  def perform(file: ImageFile): Unit
+}
+
+class OpenOperation extends FileOperation {
+  override def perform(file: TextFile): Unit = println(s"Opening text file ${file.name}")
+  override def perform(file: ImageFile): Unit = println(s"Opening image file ${file.name}")
+}
+
+class DeleteOperation extends FileOperation {
+  override def perform(file: TextFile): Unit = println(s"Deleting text file ${file.name}")
+  override def perform(file: ImageFile): Unit = println(s"Deleting image file ${file.name}")
+}
+```
+
+1. ¿Qué patrón de diseño se está utilizando en este fragmento de código?
+2. Dibuja un diagrama UML que refleje el diseño de esta implementación.
+### Programa 10: Servicio de Conexión
+
+Considere un sistema que requiere de un servicio de conexión a un servidor.
+Dado que la creación de esta conexión es costosa en términos de recursos, y el hecho de que no se 
+requieren múltiples conexiones al mismo servidor, una única instancia de este servicio es suficiente 
+para toda la aplicación.
+
+A continuación se muestra una implementación de este servicio:
+
+```scala
+class ConnectionService private (server: String) {
+  
+  def connect(): Unit = {
+    println(s"Connecting to $server...")
+  }
+}
+
+object ConnectionService {
+  private val instance = new ConnectionService("localhost")
+
+  def getInstance: ConnectionService = instance
+}
+```
+
+1. ¿Qué patrón de diseño se está utilizando en este fragmento de código?
+2. Dibuja un diagrama UML que refleje el diseño de esta implementación.
+3. Escribe un programa de ejemplo que utiliza la clase `ConnectionService` para conectar al 
+  servidor.
+
+### Programa 11: Gestión de tareas
 
 Considere el siguiente fragmento de código, que representa un sistema para administrar una lista de tareas:
 
@@ -374,7 +523,7 @@ Esto puede ser una `SingleTask` o un `TaskGroup`, que puede contener múltiples 
 1. Identifique el patrón de diseño utilizado en este fragmento de código.
 2. Dibuje un diagrama UML del sistema.
 
-### Programa 8: Log Management
+### Programa 12: Log Management
 <!-- Null Object -->
 
 Considere el siguiente código Scala:
@@ -406,75 +555,59 @@ Hay dos tipos de registradores, uno es `ConsoleLogger` que registra el mensaje e
 1. Identifique el patrón de diseño utilizado en este fragmento de código.
 2. Dibuje un diagrama UML del sistema.
 
-### Programa 9: Creación de Pinceles
 
-Considera el siguiente código en Scala:
+Ejercicio 2: Implementación de patrones de diseño
+-------------------------------------------------
 
-```scala
-trait Brush {
-  def paint(): Unit
-}
+### 1. Tratamiento de formas geométricas
+<!-- 1 Visitor -->
 
-class OilBrush(val size: Int) extends Brush {
-  override def paint(): Unit = println(s"Pintando con pincel de óleo de tamaño: $size...")
-}
+Suponga que está trabajando en un programa de diseño gráfico que maneja varias formas geométricas 
+como círculos, rectángulos y triángulos.
+Cada forma tiene sus propias características y formas de calcular su área y perímetro.
 
-class WaterBrush(val size: Int) extends Brush {
-  override def paint(): Unit = println(s"Pintando con pincel de agua de tamaño: $size...")
-}
+Ahora, se espera que su programa pueda exportar estas formas a diferentes formatos como XML y JSON.
+Es probable que en el futuro se requieran más formatos de exportación.
+No queremos cambiar cada clase de forma cada vez que necesitemos un nuevo formato de exportación.
 
-trait ArtKit {
-  def createBrush(): Brush
-}
+1. Con base en el escenario proporcionado, ¿qué patrón de diseño debe usarse para resolver este 
+  problema? Justifique su elección.
+2. Cree un diagrama UML para su solución propuesta.
+3. Implemente su solución en código. Debe incluir las clases para las formas geométricas (círculos, 
+  rectángulos y triángulos), así como las clases necesarias para exportar estas formas a XML y JSON.
+  Asegúrese de demostrar cómo se puede agregar un nuevo formato de exportación sin modificar las 
+  clases de las formas.
 
-class OilArtKit extends ArtKit {
-  override def createBrush(): Brush = new OilBrush(size)
-}
+*Hint: Recuerde que su solución debe permitir agregar nuevas formas de exportación sin cambiar las clases de las formas geométricas. Su diseño debe ser lo suficientemente flexible como para manejar fácilmente la incorporación de nuevas formas de exportación en el futuro.*
 
-class WaterArtKit(size: Int) extends ArtKit {
-  override def createBrush(): Brush = new WaterBrush(size)
-}
-```
+### 2. Manejo de usuarios desconocidos
+<!-- 2 Null Object -->
 
-En este sistema, diferentes tipos de kits de arte necesitan crear diferentes tipos de pinceles. Dependiendo del tipo de kit, se crea y se utiliza un tipo diferente de pincel para pintar. Los pinceles pueden ser de distintos tamaños dependiendo de los parámetros específicos de su kit.
+Suponga que está construyendo una aplicación que tiene un sistema de inicio de sesión.
+Al ingresar su nombre de usuario, el sistema buscará en la base de datos la información de dicho 
+usuario.
+Si el usuario existe, el sistema proporcionará toda la información del perfil de usuario.
+Sin embargo, si el usuario no existe, el sistema simplemente mostrará un mensaje de error.
 
-**Preguntas:**
+Ahora se le pide que cambies este comportamiento.
+En lugar de simplemente mostrar un mensaje de error para un usuario desconocido, se desea que el
+sistema muestre un perfil de usuario con información predeterminada (como "Invitado" para el nombre
+de usuario, "N/A" para el correo electrónico, etc.).
 
-1. Identifica el patrón de diseño utilizado en este fragmento de código.
-2. Dibuja un diagrama UML del sistema.
+1. Con base en el escenario proporcionado, ¿qué patrón de diseño debes usar para resolver este 
+  problema?
+2. Cree un diagrama UML para su solución propuesta.
+3. Implemente su solución en código.
 
-### Programa 10: Servicio de Conexión
+<!-- 3 Factory Method -->
+<!-- 4 Proxy -->
+<!-- 5 State -->
+<!-- 6 Observer -->
+<!-- 7 Flyweight -->
+<!-- 8 Singleton -->
+<!-- 9 Composite -->
 
-Considere un sistema que requiere de un servicio de conexión a un servidor.
-Dado que la creación de esta conexión es costosa en términos de recursos, y el hecho de que no se 
-requieren múltiples conexiones al mismo servidor, una única instancia de este servicio es suficiente 
-para toda la aplicación.
-
-A continuación se muestra una implementación de este servicio:
-
-```scala
-class ConnectionService private (server: String) {
-  
-  def connect(): Unit = {
-    println(s"Connecting to $server...")
-  }
-}
-
-object ConnectionService {
-  private val instance = new ConnectionService("localhost")
-
-  def getInstance: ConnectionService = instance
-}
-```
-
-1. ¿Qué patrón de diseño se está utilizando en este fragmento de código?
-2. Dibuja un diagrama UML que refleje el diseño de esta implementación.
-3. Escribe un programa de ejemplo que utiliza la clase `ConnectionService` para conectar al 
-  servidor.
-
-### Ejercicio 2: Implementación de patrones de diseño
-
-### a. Sistema monitor de clima
+## 10. Sistema monitor de clima
 <!-- Adapter -->
 
 Asumamos que tenemos un sistema monitor de clima que obtiene datos de diferentes sensores de 
@@ -487,3 +620,6 @@ nuestra interfaz existente.
 1. Identifique el patrón de diseño que se puede aplicar para resolver este problema.
 2. Dibuje el diagrama de clases (UML) de la solución.
 3. Implemente la solución en Scala.
+
+<!-- 11 Template -->
+<!-- 12 Double Dispatch -->
