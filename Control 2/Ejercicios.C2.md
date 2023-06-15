@@ -142,6 +142,7 @@ userDatabase.addUser(User("1"))  // prints "Inserting user 1 into MongoDB"
 2. Dibuje el diagrama de clases (UML) del programa.
 
 #### Programa 3: Control de acceso
+<!-- Proxy -->
 
 Considere el siguiente escenario en el que tenemos un objeto que representa un sistema seguro al que
 solo pueden acceder los usuarios autorizados.
