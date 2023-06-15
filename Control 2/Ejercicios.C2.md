@@ -19,6 +19,7 @@ Tabla de contenidos
   - [Ejercicio 2: Implementación de patrones de diseño](#ejercicio-2-implementación-de-patrones-de-diseño)
     - [1. Tratamiento de formas geométricas](#1-tratamiento-de-formas-geométricas)
     - [2. Manejo de usuarios desconocidos](#2-manejo-de-usuarios-desconocidos)
+- [3. Creación Personalizada de Documentos](#3-creación-personalizada-de-documentos)
   - [10. Sistema monitor de clima](#10-sistema-monitor-de-clima)
 
 Parte 1: Patrones de diseño
@@ -581,7 +582,7 @@ No queremos cambiar cada clase de forma cada vez que necesitemos un nuevo format
 *Hint: Recuerde que su solución debe permitir agregar nuevas formas de exportación sin cambiar las clases de las formas geométricas. Su diseño debe ser lo suficientemente flexible como para manejar fácilmente la incorporación de nuevas formas de exportación en el futuro.*
 
 ### 2. Manejo de usuarios desconocidos
-<!-- 2 Null Object -->
+<!-- 2 Null Object -->                             
 
 Suponga que está construyendo una aplicación que tiene un sistema de inicio de sesión.
 Al ingresar su nombre de usuario, el sistema buscará en la base de datos la información de dicho 
@@ -599,7 +600,34 @@ de usuario, "N/A" para el correo electrónico, etc.).
 2. Cree un diagrama UML para su solución propuesta.
 3. Implemente su solución en código.
 
-<!-- 3 Factory Method -->
+# 3. Creación Personalizada de Documentos
+
+Te encuentras trabajando en una aplicación de procesamiento de texto.
+Esta aplicación puede manejar diferentes tipos de documentos como documentos de texto (.txt), 
+documentos Word (.docx) y documentos PDF (.pdf).
+Cuando un usuario desea crear un nuevo documento, se le presenta una lista de los diferentes tipos
+de documentos que puede crear.
+Además, el usuario tiene la opción de personalizar el nombre del documento.
+
+Tu tarea es implementar la funcionalidad para crear un nuevo documento basado en el tipo y el nombre
+especificados por el usuario.
+
+1. Dado el escenario anterior, ¿qué patrón de diseño crees que debes utilizar para resolver este problema? Explica tu elección.
+
+2. Cree un diagrama UML para tu solución propuesta. 
+  El diagrama debe ilustrar claramente las clases que interactúan, su relación y cómo se implementa el 
+  patrón de diseño elegido.
+3. Implementa tu solución en código.
+  Debes incluir las clases para los diferentes tipos de documentos y la lógica para crear un nuevo 
+  documento basado en la elección y la entrada del usuario.
+  Tu solución debería permitir la fácil adición de nuevos tipos de documentos en el futuro.
+4. Debes crear una clase de fábrica para cada tipo de documento.
+  Esta clase de fábrica debería tener una propiedad name que puede ser ajustada re-usando la misma 
+  fábrica y un método create() que crea una nueva instancia del tipo de documento correspondiente 
+  con el nombre especificado.
+
+*Hint: Recuerda que tu solución debe permitir la creación de diferentes tipos de documentos sin tener que modificar el código cada vez que se añade un nuevo tipo de documento. En lugar de ello, deberías poder extender la funcionalidad existente de una manera ordenada y estructurada.*
+
 <!-- 4 Proxy -->
 <!-- 5 State -->
 <!-- 6 Observer -->
