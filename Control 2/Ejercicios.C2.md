@@ -1,18 +1,18 @@
-# Ejercicios
+Tabla de contenidos
+===================
 
-## Tabla de contenidos
-
-- [Ejercicios](#ejercicios)
-  - [Tabla de contenidos](#tabla-de-contenidos)
-  - [Parte 1: Patrones de diseño](#parte-1-patrones-de-diseño)
-    - [Ejercicio 1: Identificación de patrones de diseño](#ejercicio-1-identificación-de-patrones-de-diseño)
-      - [Programa 1: Interacción entre personajes](#programa-1-interacción-entre-personajes)
-      - [Programa 2: Base de datos](#programa-2-base-de-datos)
-      - [Programa 3: Control de acceso](#programa-3-control-de-acceso)
+- [Tabla de contenidos](#tabla-de-contenidos)
+- [Parte 1: Patrones de diseño](#parte-1-patrones-de-diseño)
+  - [Ejercicio 1: Identificación de patrones de diseño](#ejercicio-1-identificación-de-patrones-de-diseño)
+    - [Programa 1: Interacción entre personajes](#programa-1-interacción-entre-personajes)
+    - [Programa 2: Base de datos](#programa-2-base-de-datos)
+    - [Programa 3: Control de acceso](#programa-3-control-de-acceso)
+    - [Programa 4: Sistema de subastas](#programa-4-sistema-de-subastas)
     - [Ejercicio 2: Implementación de patrones de diseño](#ejercicio-2-implementación-de-patrones-de-diseño)
-      - [a. Sistema monitor de clima](#a-sistema-monitor-de-clima)
+    - [a. Sistema monitor de clima](#a-sistema-monitor-de-clima)
 
-## Parte 1: Patrones de diseño
+Parte 1: Patrones de diseño
+===========================
 
 Para los siguientes ejercicios, considere los siguientes patrones de diseño:
 
@@ -29,12 +29,13 @@ Para los siguientes ejercicios, considere los siguientes patrones de diseño:
 - Template
 - Visitor
 
-### Ejercicio 1: Identificación de patrones de diseño
+Ejercicio 1: Identificación de patrones de diseño
+-------------------------------------------------
 
 Para cada uno de los programas que se presentan a continuación, identifique qué patrón de diseño se 
 está aplicando
 
-#### Programa 1: Interacción entre personajes
+### Programa 1: Interacción entre personajes
 <!-- Double Dispatch -->
 
 En un juego 2D, tenemos diferentes tipos de personajes: un Guerrero y un Mago. 
@@ -86,7 +87,7 @@ mage.interactWith(warrior)  // prints "Mage interacts with a Warrior"
 1. Identifique el patrón de diseño que se utiliza para implementar la interacción entre personajes.
 2. Dibuje el diagrama de clases (UML) del programa.
 
-#### Programa 2: Base de datos
+### Programa 2: Base de datos
 <!-- Adapter -->
 
 Considere una aplicación que interactúa con varios tipos de bases de datos. 
@@ -141,7 +142,7 @@ userDatabase.addUser(User("1"))  // prints "Inserting user 1 into MongoDB"
   que `MongoDB` sea compatible con el resto de la aplicación?
 2. Dibuje el diagrama de clases (UML) del programa.
 
-#### Programa 3: Control de acceso
+### Programa 3: Control de acceso
 <!-- Proxy -->
 
 Considere el siguiente escenario en el que tenemos un objeto que representa un sistema seguro al que
@@ -185,12 +186,54 @@ En este escenario:
 2. ¿Puede dibujar un diagrama UML que represente la relación entre las diferentes clases e 
   interfaces?
 
+### Programa 4: Sistema de subastas
+<!-- Observer -->
+
+Considere el siguiente escenario en el que tenemos un sistema de subastas. 
+Hay varios postores para un artículo, y cada vez que se realiza una nueva oferta, todos los postores
+deben ser notificados del nuevo monto de la oferta.
+
+Aquí hay una implementación de ejemplo en Scala:
+
+```scala
+trait Bidder {
+  def update(newBidAmount: Double): Unit
+}
+
+class ConcreteBidder(name: String) extends Bidder {
+  def update(newBidAmount: Double): Unit = {
+    println(s"$name has been notified. New bid amount is $newBidAmount")
+  }
+}
+
+class Auction {
+  private var bidders = List[Bidder]()
+  private var _bidAmount = 0.0
+
+  def addBidder(bidder: Bidder): Unit = {
+    bidders = bidder :: bidders
+  }
+
+  def removeBidder(bidder: Bidder): Unit = {
+    bidders = bidders.filterNot(_ == bidder)
+  }
+
+  def setBidAmount(bidder: Bidder, amount: Double): Unit = {
+    println(s"New bid placed by ${bidder.getClass.getSimpleName} of $amount")
+    _bidAmount = amount
+    bidders.foreach(_.update(_bidAmount))
+  }
+}
+```
+
+En este escenario:
+1. ¿Qué patrón de diseño se ha utilizado para resolver el problema?
+2. ¿Puede dibujar un diagrama UML que represente la relación entre las diferentes clases e 
+  interfaces?
 
 ### Ejercicio 2: Implementación de patrones de diseño
 
-
-
-#### a. Sistema monitor de clima
+### a. Sistema monitor de clima
 <!-- Adapter -->
 
 Asumamos que tenemos un sistema monitor de clima que obtiene datos de diferentes sensores de 
@@ -203,4 +246,3 @@ nuestra interfaz existente.
 1. Identifique el patrón de diseño que se puede aplicar para resolver este problema.
 2. Dibuje el diagrama de clases (UML) de la solución.
 3. Implemente la solución en Scala.
-
