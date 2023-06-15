@@ -8,6 +8,7 @@
     - [Ejercicio 1: Identificación de patrones de diseño](#ejercicio-1-identificación-de-patrones-de-diseño)
       - [Programa 1: Interacción entre personajes](#programa-1-interacción-entre-personajes)
       - [Programa 2: Base de datos](#programa-2-base-de-datos)
+      - [Programa 3: Control de acceso](#programa-3-control-de-acceso)
     - [Ejercicio 2: Implementación de patrones de diseño](#ejercicio-2-implementación-de-patrones-de-diseño)
       - [a. Sistema monitor de clima](#a-sistema-monitor-de-clima)
 
@@ -82,6 +83,9 @@ warrior.interactWith(mage)  // prints "Warrior interacts with a Mage"
 mage.interactWith(warrior)  // prints "Mage interacts with a Warrior"
 ```
 
+1. Identifique el patrón de diseño que se utiliza para implementar la interacción entre personajes.
+2. Dibuje el diagrama de clases (UML) del programa.
+
 #### Programa 2: Base de datos
 <!-- Adapter -->
 
@@ -133,10 +137,57 @@ val userDatabase = new UserDatabase(new MongoDB)
 userDatabase.addUser(User("1"))  // prints "Inserting user 1 into MongoDB"
 ```
 
-Dada la implementación anterior, ¿puede identificar el patrón de diseño que se utiliza para hacer 
-que `MongoDB` sea compatible con el resto de la aplicación?
+1. Dada la implementación anterior, ¿puede identificar el patrón de diseño que se utiliza para hacer 
+  que `MongoDB` sea compatible con el resto de la aplicación?
+2. Dibuje el diagrama de clases (UML) del programa.
+
+#### Programa 3: Control de acceso
+
+Considere el siguiente escenario en el que tenemos un objeto que representa un sistema seguro al que
+solo pueden acceder los usuarios autorizados.
+Sin embargo, los usuarios pueden intentar acceder al sistema directamente, lo que podría provocar
+riesgos de seguridad.
+Para evitar esto, hemos agregado una capa adicional entre los usuarios y el sistema seguro.
+Esta capa verifica las credenciales del usuario antes de permitirles acceder al sistema seguro.
+
+Aquí hay una implementación de ejemplo en Scala:
+
+
+```scala
+trait SecureSystem {
+  def access(user: String, password: String): String
+}
+
+class ActualSystem extends SecureSystem {
+  def access(user: String, password: String): String = {
+    s"Access granted for user: $user"
+  }
+}
+
+class AccessControlLayer extends SecureSystem {
+  private val system: SecureSystem = new ActualSystem
+  // Don't do this in real life!
+  private val users = Map("John" -> "1234", "Jane" -> "4321")
+
+  def access(user: String, password: String): String = {
+    if (users.get(user).contains(password)) {
+      system.access(user, password)
+    } else {
+      "Access denied"
+    }
+  }
+}
+```
+
+En este escenario:
+1. ¿Qué patrón de diseño se puede aplicar para resolver el problema?
+2. ¿Puede dibujar un diagrama UML que represente la relación entre las diferentes clases e 
+  interfaces?
+
 
 ### Ejercicio 2: Implementación de patrones de diseño
+
+
 
 #### a. Sistema monitor de clima
 <!-- Adapter -->
