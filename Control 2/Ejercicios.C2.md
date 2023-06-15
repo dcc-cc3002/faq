@@ -20,6 +20,7 @@ Tabla de contenidos
     - [1. Tratamiento de formas geométricas](#1-tratamiento-de-formas-geométricas)
     - [2. Manejo de usuarios desconocidos](#2-manejo-de-usuarios-desconocidos)
 - [3. Creación Personalizada de Documentos](#3-creación-personalizada-de-documentos)
+    - [4. Sistema de pagos](#4-sistema-de-pagos)
   - [10. Sistema monitor de clima](#10-sistema-monitor-de-clima)
 
 Parte 1: Patrones de diseño
@@ -628,7 +629,22 @@ especificados por el usuario.
 
 *Hint: Recuerda que tu solución debe permitir la creación de diferentes tipos de documentos sin tener que modificar el código cada vez que se añade un nuevo tipo de documento. En lugar de ello, deberías poder extender la funcionalidad existente de una manera ordenada y estructurada.*
 
+### 4. Sistema de pagos
 <!-- 4 Proxy -->
+
+Considere que se desea implementar un sistema de pago que permita realizar pagos a través de
+tarjetas de crédito, tarjetas de débito y efectivo. Además, se desea que el sistema pueda
+realizar pagos a través de múltiples monedas.
+Para esto considere que desde el punto de vista del sistema de pago, todos los tipos de pago son
+equivalentes, es decir, no importa si el pago se realiza con tarjeta de crédito, tarjeta de débito
+o efectivo, el sistema de pago no necesita tener conocimiento de la forma en que se realiza el pago.
+
+1. Con base en el escenario anterior, ¿qué patrón de diseño crees que debes utilizar para resolver este problema?
+2. Cree un diagrama UML para su solución propuesta.
+3. Implemente su solución en código.
+
+*Hint: Implemente su solución de tal forma que todos los tipos de pago implementen la __misma interfaz__*
+
 <!-- 5 State -->
 <!-- 6 Observer -->
 <!-- 7 Flyweight -->
