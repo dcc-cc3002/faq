@@ -12,6 +12,8 @@ Tabla de contenidos
     - [Programa 6: Procesamiento de datos](#programa-6-procesamiento-de-datos)
     - [Programa 7: Gestión de tareas](#programa-7-gestión-de-tareas)
     - [Programa 8: Log Management](#programa-8-log-management)
+    - [Programa 9: Creación de Pinceles](#programa-9-creación-de-pinceles)
+    - [Programa 10: Servicio de Conexión](#programa-10-servicio-de-conexión)
     - [Ejercicio 2: Implementación de patrones de diseño](#ejercicio-2-implementación-de-patrones-de-diseño)
     - [a. Sistema monitor de clima](#a-sistema-monitor-de-clima)
 
@@ -403,6 +405,72 @@ Hay dos tipos de registradores, uno es `ConsoleLogger` que registra el mensaje e
 
 1. Identifique el patrón de diseño utilizado en este fragmento de código.
 2. Dibuje un diagrama UML del sistema.
+
+### Programa 9: Creación de Pinceles
+
+Considera el siguiente código en Scala:
+
+```scala
+trait Brush {
+  def paint(): Unit
+}
+
+class OilBrush(val size: Int) extends Brush {
+  override def paint(): Unit = println(s"Pintando con pincel de óleo de tamaño: $size...")
+}
+
+class WaterBrush(val size: Int) extends Brush {
+  override def paint(): Unit = println(s"Pintando con pincel de agua de tamaño: $size...")
+}
+
+trait ArtKit {
+  def createBrush(): Brush
+}
+
+class OilArtKit extends ArtKit {
+  override def createBrush(): Brush = new OilBrush(size)
+}
+
+class WaterArtKit(size: Int) extends ArtKit {
+  override def createBrush(): Brush = new WaterBrush(size)
+}
+```
+
+En este sistema, diferentes tipos de kits de arte necesitan crear diferentes tipos de pinceles. Dependiendo del tipo de kit, se crea y se utiliza un tipo diferente de pincel para pintar. Los pinceles pueden ser de distintos tamaños dependiendo de los parámetros específicos de su kit.
+
+**Preguntas:**
+
+1. Identifica el patrón de diseño utilizado en este fragmento de código.
+2. Dibuja un diagrama UML del sistema.
+
+### Programa 10: Servicio de Conexión
+
+Considere un sistema que requiere de un servicio de conexión a un servidor.
+Dado que la creación de esta conexión es costosa en términos de recursos, y el hecho de que no se 
+requieren múltiples conexiones al mismo servidor, una única instancia de este servicio es suficiente 
+para toda la aplicación.
+
+A continuación se muestra una implementación de este servicio:
+
+```scala
+class ConnectionService private (server: String) {
+  
+  def connect(): Unit = {
+    println(s"Connecting to $server...")
+  }
+}
+
+object ConnectionService {
+  private val instance = new ConnectionService("localhost")
+
+  def getInstance: ConnectionService = instance
+}
+```
+
+1. ¿Qué patrón de diseño se está utilizando en este fragmento de código?
+2. Dibuja un diagrama UML que refleje el diseño de esta implementación.
+3. Escribe un programa de ejemplo que utiliza la clase `ConnectionService` para conectar al 
+  servidor.
 
 ### Ejercicio 2: Implementación de patrones de diseño
 
