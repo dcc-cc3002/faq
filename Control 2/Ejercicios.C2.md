@@ -1,8 +1,18 @@
 # Ejercicios
 
-## Ejercicio 1: Identificación de patrones de diseño
+## Tabla de contenidos
 
-Considerando los patrones de diseño:
+- [Ejercicios](#ejercicios)
+  - [Tabla de contenidos](#tabla-de-contenidos)
+  - [Parte 1: Patrones de diseño](#parte-1-patrones-de-diseño)
+    - [Ejercicio 1: Identificación de patrones de diseño](#ejercicio-1-identificación-de-patrones-de-diseño)
+      - [Programa 1: Interacción entre personajes](#programa-1-interacción-entre-personajes)
+    - [Ejercicio 2: Implementación de patrones de diseño](#ejercicio-2-implementación-de-patrones-de-diseño)
+      - [a. Sistema monitor de clima ](#a-sistema-monitor-de-clima-)
+
+## Parte 1: Patrones de diseño
+
+Para los siguientes ejercicios, considere los siguientes patrones de diseño:
 
 - Adapter
 - Composite
@@ -17,10 +27,13 @@ Considerando los patrones de diseño:
 - Template
 - Visitor
 
+### Ejercicio 1: Identificación de patrones de diseño
+
 Para cada uno de los programas que se presentan a continuación, identifique qué patrón de diseño se 
 está aplicando
 
-### Programa 1 <!-- Double Dispatch -->
+#### Programa 1: Interacción entre personajes
+<!-- Double Dispatch -->
 
 En un juego 2D, tenemos diferentes tipos de personajes: un Guerrero y un Mago. 
 Cada personaje puede interactuar con otros, causando diferentes resultados basados en el tipo de los
@@ -68,9 +81,11 @@ warrior.interactWith(mage)  // prints "Warrior interacts with a Mage"
 mage.interactWith(warrior)  // prints "Mage interacts with a Warrior"
 ```
 
-## Ejercicio 2: Implementación de patrones de diseño
 
-### a. Sistema monitor de clima <!-- Adapter -->
+
+### Ejercicio 2: Implementación de patrones de diseño
+
+#### a. Sistema monitor de clima <!-- Adapter -->
 
 Asumamos que tenemos un sistema monitor de clima que obtiene datos de diferentes sensores de 
 clima. 
@@ -79,6 +94,7 @@ La interfaz de los nuevos sensores es diferente a la que tenemos actualmente.
 Para mantener la funcionalidad del sistema existente, necesitamos adaptar estos nuevos sensores a 
 nuestra interfaz existente.
 
-#### i
+1. Identifique el patrón de diseño que se puede aplicar para resolver este problema.
+2. Dibuje el diagrama de clases (UML) de la solución.
+3. Implemente la solución en Scala.
 
-Identifique el patrón de diseño que se puede aplicar para resolver este problema.
