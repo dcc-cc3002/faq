@@ -8,7 +8,10 @@ Tabla de contenidos
     - [Programa 2: Base de datos](#programa-2-base-de-datos)
     - [Programa 3: Control de acceso](#programa-3-control-de-acceso)
     - [Programa 4: Sistema de subastas](#programa-4-sistema-de-subastas)
-    - [Programa 5: Sistema de navegación](#programa-5-sistema-de-navegación)
+    - [Programa 5: Niveles de juego](#programa-5-niveles-de-juego)
+    - [Programa 6: Procesamiento de datos](#programa-6-procesamiento-de-datos)
+    - [Programa 7: Gestión de tareas](#programa-7-gestión-de-tareas)
+    - [Programa 8: Log Management](#programa-8-log-management)
     - [Ejercicio 2: Implementación de patrones de diseño](#ejercicio-2-implementación-de-patrones-de-diseño)
     - [a. Sistema monitor de clima](#a-sistema-monitor-de-clima)
 
@@ -76,12 +79,6 @@ class Mage extends Character {
     println("Mage interacts with another Mage")
   }
 }
-
-val warrior = new Warrior
-val mage = new Mage
-
-warrior.interactWith(mage)  // prints "Warrior interacts with a Mage"
-mage.interactWith(warrior)  // prints "Mage interacts with a Warrior"
 ```
 
 1. Identifique el patrón de diseño que se utiliza para implementar la interacción entre personajes.
@@ -144,12 +141,6 @@ class MongoDB extends Database {
 }
 
 case class User(id: String)
-
-val userDatabase = new UserDatabase(new SQLDatabase)
-userDatabase.addUser(User("1"))  // prints "Inserting user 1 into MySQL database"
-
-val userDatabase = new UserDatabase(new MongoDB)
-userDatabase.addUser(User("1"))  // prints "Inserting user 1 into MongoDB"
 ```
 
 1. Dada la implementación anterior, ¿puede identificar el patrón de diseño que se utiliza para hacer 
@@ -260,56 +251,158 @@ En este escenario:
 2. ¿Puede dibujar un diagrama UML que represente la relación entre las diferentes clases e 
   interfaces?
 
-### Programa 5: Sistema de navegación
-<!-- State -->
+### Programa 5: Niveles de juego
 
-Considere un sistema de automóvil simplificado donde un automóvil puede estar en uno de los tres 
-modos: estacionado, conduciendo o en reversa.
-El comportamiento del pedal del acelerador cambia según el modo actual del automóvil.
+Considere el siguiente fragmento de código, que representa a un jugador progresando a través de los 
+niveles de un juego.
+El juego tiene tres niveles: "Principiante", "Intermedio" y "Avanzado".
+Desde cada nivel, el jugador puede subir o bajar de nivel.
+Sin embargo, hay ciertas reglas:
 
-Aquí hay una implementación de ejemplo en Scala:
+1. El jugador no puede bajar de nivel desde el nivel "Principiante".
+2. El jugador no puede subir de nivel desde el nivel "Avanzado".
 
 ```scala
-trait CarMode {
-  def accelerate(): Unit
+class GameLevel {
+  def levelUp(): GameLevel = throw new UnsupportedOperationException
+  def levelDown(): GameLevel = throw new UnsupportedOperationException
+  def levelName: String = this.getClass.getSimpleName
 }
 
-class ParkedMode extends CarMode {
-  override def accelerate(): Unit = {
-    println("Car is parked. Accelerating won't do anything.")
+class BeginnerLevel extends GameLevel {
+  override def levelUp(): GameLevel = new IntermediateLevel
+}
+
+class IntermediateLevel extends GameLevel {
+  override def levelUp(): GameLevel = new AdvancedLevel
+  override def levelDown(): GameLevel = new BeginnerLevel
+}
+
+class AdvancedLevel extends GameLevel {
+  override def levelDown(): GameLevel = new IntermediateLevel
+}
+
+class Player(var level: GameLevel = new BeginnerLevel) {
+  def levelUp(): Unit = {
+    level = level.levelUp()
+  }
+  def levelDown(): Unit = {
+    level = level.levelDown()
+  }
+  def currentLevel: GameLevel = level
+}
+```
+
+1. Identifique el patrón de diseño utilizado en este fragmento de código.
+2. Dibuje un diagrama UML del sistema.
+3. Explique por qué se utiliza este patrón de diseño y cómo beneficia al sistema.
+
+### Programa 6: Procesamiento de datos
+<!-- Template Method -->
+
+Considere el siguiente fragmento de código, que representa un sistema que procesa dos tipos de 
+datos: ``TextData`` y ``NumericData``. 
+Ambos tipos de datos siguen un proceso similar pero con diferencias sutiles:
+
+```scala
+abstract class DataProcessor {
+  def fetchData(): Unit
+  def parseData(): Unit
+  def processParsedData(): Unit
+  def saveResults(): Unit
+
+  final def processData(): Unit = {
+    fetchData()
+    parseData()
+    processParsedData()
+    saveResults()
+    println("Data processed successfully")
   }
 }
 
-class DriveMode extends CarMode {
-  override def accelerate(): Unit = {
-    println("Car is in drive mode. Accelerating...")
-  }
+class TextDataProcessor extends DataProcessor {
+  override def fetchData(): Unit = println("Fetching text data...")
+  override def parseData(): Unit = println("Parsing text data...")
+  override def processParsedData(): Unit = println("Processing parsed text data...")
+  override def saveResults(): Unit = println("Saving text data results...")
 }
 
-class ReverseMode extends CarMode {
-  override def accelerate(): Unit = {
-    println("Car is in reverse mode. Moving backwards...")
-  }
+class NumericDataProcessor extends DataProcessor {
+  override def fetchData(): Unit = println("Fetching numeric data...")
+  override def parseData(): Unit = println("Parsing numeric data...")
+  override def processParsedData(): Unit = println("Processing parsed numeric data...")
+  override def saveResults(): Unit = println("Saving numeric data results...")
+}
+```
+
+1. Identifique el patrón de diseño utilizado en este fragmento de código.
+2. Dibuje un diagrama UML del sistema.
+
+### Programa 7: Gestión de tareas
+
+Considere el siguiente fragmento de código, que representa un sistema para administrar una lista de tareas:
+
+```scala
+trait Task {
+  def execute(): Unit
 }
 
-class Car {
-  private var mode: CarMode = new ParkedMode()
+class SingleTask(name: String) extends Task {
+  override def execute(): Unit = println(s"Executing task: $name")
+}
 
-  def setMode(newMode: CarMode): Unit = {
-    mode = newMode
-  }
+class TaskGroup(name: String) extends Task {
+  private var tasks: List[Task] = List.empty
 
-  def accelerate(): Unit = {
-    mode.accelerate()
+  def addTask(task: Task): Unit = tasks = tasks :+ task
+  def removeTask(task: Task): Unit = tasks = tasks.filterNot(_ == task)
+
+  override def execute(): Unit = {
+    println(s"Executing group of tasks: $name")
+    tasks.foreach(_.execute())
   }
 }
 ```
 
-En este escenario:
-1. ¿Qué patrón de diseño se ha utilizado para resolver el problema?
-2. ¿Puede dibujar un diagrama UML que represente la relación entre las diferentes clases e 
-  interfaces?
-1. Escriba un método para cambiar el modo del automóvil y luego acelerar.
+In this code, we can see that there is a `Task` trait that represents a task to be performed. This can be a `SingleTask` or a `TaskGroup`, which can contain multiple `Task` objects. 
+
+En este código, podemos ver que hay un rasgo `Task` que representa una tarea a realizar.
+Esto puede ser una `SingleTask` o un `TaskGroup`, que puede contener múltiples objetos `Task`.
+
+1. Identifique el patrón de diseño utilizado en este fragmento de código.
+2. Dibuje un diagrama UML del sistema.
+
+### Programa 8: Log Management
+<!-- Null Object -->
+
+Considere el siguiente código Scala:
+
+```scala
+trait Logger {
+  def log(message: String): Unit
+}
+
+class ConsoleLogger extends Logger {
+  override def log(message: String): Unit = println(s"LOG: $message")
+}
+
+class SilentLogger extends Logger {
+  override def log(message: String): Unit = {
+    // Do nothing
+  }
+}
+
+object Logger {
+  def apply(enableLogging: Boolean): Logger = 
+    if (enableLogging) new ConsoleLogger() else new SilentLogger()
+}
+```
+
+Este sistema se utiliza para controlar el registro en una aplicación.
+Hay dos tipos de registradores, uno es `ConsoleLogger` que registra el mensaje en la consola, y otro es `SilentLogger`, que no hace nada cuando se le pide que registre un mensaje.
+
+1. Identifique el patrón de diseño utilizado en este fragmento de código.
+2. Dibuje un diagrama UML del sistema.
 
 ### Ejercicio 2: Implementación de patrones de diseño
 
