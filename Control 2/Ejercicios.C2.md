@@ -29,6 +29,20 @@ Tabla de contenidos
     - [10. Sistema monitor de clima](#10-sistema-monitor-de-clima)
     - [11. Creación de Informes](#11-creación-de-informes)
     - [12. Interacciones de Objetos en Juegos de Estrategia](#12-interacciones-de-objetos-en-juegos-de-estrategia)
+- [Parte 2: Excepciones](#parte-2-excepciones)
+  - [Ejercicio 1: Clases de Excepciones](#ejercicio-1-clases-de-excepciones)
+  - [Ejercicio 2: Checked vs Unchecked Exceptions](#ejercicio-2-checked-vs-unchecked-exceptions)
+  - [Ejercicio 3: Buenas prácticas](#ejercicio-3-buenas-prácticas)
+  - [Ejercicio 4: Manejo de Excepciones](#ejercicio-4-manejo-de-excepciones)
+    - [4.1.](#41)
+    - [4.2.](#42)
+    - [4.3.](#43)
+  - [Ejercicio 5: Orden de Ejecución](#ejercicio-5-orden-de-ejecución)
+    - [5.1.](#51)
+    - [5.2.](#52)
+    - [5.3.](#53)
+    - [5.4.](#54)
+    - [5.5.](#55)
 
 Parte 1: Patrones de diseño
 ===========================
@@ -827,3 +841,161 @@ cabo.
 3. Implemente la solución propuesta.
 
 *Nota: Asegúrate de que tu diseño permita agregar fácilmente nuevos tipos de unidades e interacciones en el futuro.*
+
+Parte 2: Excepciones
+====================
+
+Ejercicio 1: Clases de Excepciones
+----------------------------------
+
+Explique qué representan las clases:
+
+- `Throwable`
+- `Exception`
+- `Error`
+
+Ejercicio 2: Checked vs Unchecked Exceptions
+--------------------------------------------
+
+¿Qué significa que una excepción sea *checked* o *unchecked*?
+¿Cómo se implementan en Scala?
+
+Ejercicio 3: Buenas prácticas
+-----------------------------
+
+¿Por qué es una buena práctica crear excepciones personalizadas?
+¿Por qué es mala práctica atrapar excepciones de tipo `Exception`?
+
+Ejercicio 4: Manejo de Excepciones
+----------------------------------
+
+### 4.1.
+
+Implementa una función `isOutOfRange(Int, Int, Int)` que reciba un número entero y un rango (dos 
+enteros) que definen el límite inferior y superior, y que arroje una excepción `OutOfRangeException`
+si el número está fuera del rango especificado.
+
+La excepción `OutOfRangeException` debe ser implementada por ti, y debe heredar de `Exception`.
+
+### 4.2.
+
+Escribe una función `checkRange(Int, Int)` que reciba dos números enteros que definen el límite
+inferior y superior de un rango, y que arroje una excepción `InvalidRangeException` si el límite
+inferior es mayor o igual al límite superior.
+
+La excepción `InvalidRangeException` debe ser implementada por ti, y debe heredar de `Exception`.
+
+Agregue este chequeo a la función `isOutOfRange` del ejercicio anterior.
+
+### 4.3.
+
+Crea un programa que primero solicite al usuario que ingrese un rango (dos enteros) que definen el
+límite inferior y superior, y luego solicite al usuario que ingrese un número entero.
+
+Ilustra el uso de esta función en un programa que solicita al usuario que ingrese un número y
+luego imprime un mensaje que indica si el número está dentro o fuera del rango.
+El programa debe continuar solicitando al usuario que ingrese valores hasta que el usuario ingrese
+un valor que no sea un número entero.
+
+En caso de que ocurra un error, el programa debe imprimir un mensaje describiendo el error y
+continuar solicitando al usuario que ingrese valores.
+El programa no debe en ningún caso terminar abruptamente debido a una excepción no controlada.
+
+Utiliza el siguiente código como punto de partida:
+
+```scala
+import scala.io.StdIn.readLine
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    while (true){
+      val input = readLine("Enter a number (or anything else to exit): ")
+      // If all characters are digits then the input is an integer
+      if (input.forall(_.isDigit)) {
+        val number = input.toInt
+        // Complete exercise here
+      } else {
+        return
+      }
+    }
+  }
+}
+```
+
+Ejercicio 5: Orden de Ejecución
+------------------------------
+
+Para los siguientes programas indique el orden de ejecución de las líneas:
+
+### 5.1.
+
+```scala
+try {
+  println("A")
+  throw new Exception("B")
+} catch {
+  case e: Exception => println("C")
+} finally {
+  println("D")
+}
+```
+
+### 5.2.
+
+```scala
+try {
+  println("A")
+  throw new Exception("B")
+} catch {
+  case e: IllegalArgumentException => println("C")
+} finally {
+  println("D")
+}
+```
+
+### 5.3.
+
+```scala
+try {
+  println("A")
+  throw new Exception("B")
+} catch {
+  case e: IllegalArgumentException => println("C")
+  case e: Exception => println("D")
+} finally {
+  println("E")
+}
+```
+
+### 5.4.
+
+```scala
+try {
+  println("A")
+  throw new IllegalArgumentException("B")
+} catch {
+  case e: Exception => println("D")
+  case e: IllegalArgumentException => println("C")
+} finally {
+  println("E")
+}
+```
+
+### 5.5.
+
+```scala
+def foo(): Int = {
+  try {
+    println("A")
+    return 1
+  } catch {
+    case e: Exception => println("B")
+      return 2
+  } finally {
+    println("C")
+    return 3
+  }
+}
+
+println(foo())
+```
