@@ -19,10 +19,10 @@ Tabla de contenidos
   - [Ejercicio 2: Implementación de patrones de diseño](#ejercicio-2-implementación-de-patrones-de-diseño)
     - [1. Tratamiento de formas geométricas](#1-tratamiento-de-formas-geométricas)
     - [2. Manejo de usuarios desconocidos](#2-manejo-de-usuarios-desconocidos)
-- [3. Creación Personalizada de Documentos](#3-creación-personalizada-de-documentos)
+    - [3. Creación Personalizada de Documentos](#3-creación-personalizada-de-documentos)
     - [4. Sistema de pagos](#4-sistema-de-pagos)
     - [5. Máquina de Dulces](#5-máquina-de-dulces)
-    - [6. Monitoreo del Stock de Productos](#6-monitoreo-del-stock-de-productos)
+    - [6. Monitor del Stock de Productos](#6-monitor-del-stock-de-productos)
     - [7. Simulador de Bosques](#7-simulador-de-bosques)
     - [8. Gestión de Configuración Global](#8-gestión-de-configuración-global)
     - [9. Calculadora de derivadas](#9-calculadora-de-derivadas)
@@ -608,7 +608,7 @@ de usuario, "N/A" para el correo electrónico, etc.).
 2. Cree un diagrama UML para su solución propuesta.
 3. Implemente su solución en código.
 
-# 3. Creación Personalizada de Documentos
+### 3. Creación Personalizada de Documentos
 
 Te encuentras trabajando en una aplicación de procesamiento de texto.
 Esta aplicación puede manejar diferentes tipos de documentos como documentos de texto (.txt), 
@@ -675,7 +675,7 @@ La máquina puede:
 2. Cree un diagrama UML para su solución propuesta.
 3. Implemente su solución en código.
 
-### 6. Monitoreo del Stock de Productos
+### 6. Monitor del Stock de Productos
 <!-- Observer -->
 
 Estás desarrollando un sistema de inventario para un gran almacén.
