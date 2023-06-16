@@ -24,6 +24,8 @@ Tabla de contenidos
     - [5. Máquina de Dulces](#5-máquina-de-dulces)
     - [6. Monitoreo del Stock de Productos](#6-monitoreo-del-stock-de-productos)
     - [7. Simulador de Bosques](#7-simulador-de-bosques)
+    - [8. Gestión de Configuración Global](#8-gestión-de-configuración-global)
+    - [9. Calculadora de derivadas](#9-calculadora-de-derivadas)
   - [10. Sistema monitor de clima](#10-sistema-monitor-de-clima)
 
 Parte 1: Patrones de diseño
@@ -716,8 +718,55 @@ Tu tarea es diseñar e implementar una solución eficiente para este problema.
   No es necesario implementar esta solución.
   <!-- 2 Flyweights, el propuesto en 1 y otro para la posición. El segundo utiliza al primero. --> 
 
+### 8. Gestión de Configuración Global
 <!-- 8 Singleton -->
+
+Estás desarrollando una aplicación de gran tamaño que requiere manejar una configuración global 
+(representada como un diccionario de tipo ``Map<String, String>``) que puede ser modificada en
+tiempo de ejecución.
+Esta configuración debe ser accesible desde cualquier parte de la aplicación y debe garantizarse que 
+sólo existe una única instancia de la configuración en todo el programa.
+
+Debido a la naturaleza crítica de esta configuración, es fundamental que ninguna parte del código 
+pueda crear una segunda instancia de la configuración, o cambiar la instancia existente sin un
+control adecuado. 
+
+Tu tarea es diseñar e implementar una solución que garantice que la configuración sea única y que
+sólo pueda ser modificada a través de un mecanismo seguro.
+
+1. Identifique el patrón de diseño que debiera ocuparse para resolver el problema descrito.
+2. Dibuje un diagrama UML de su solución propuesta.
+3. Implemente la solución propuesta.
+
+### 9. Calculadora de derivadas
 <!-- 9 Composite -->
+
+Estás desarrollando una calculadora de derivadas para ser utilizada en un curso de cálculo.
+La calculadora debe ser capaz de calcular la derivada de una función compuesta de otras funciones
+simples, para lo cual debe aplicar la regla de la cadena.
+
+La regla de la cadena establece que la derivada de una función compuesta es igual a la derivada de
+la función externa evaluada en la función interna, multiplicada por la derivada de la función
+interna.
+
+Para esto considere las siguientes 4 reglas:
+
+- La derivada de una función constante es 0.
+- La derivada de una variable es 1.
+- La derivada de una suma es la suma de las derivadas.
+- La derivada de una multiplicación es la suma de los productos de las derivadas de cada factor.
+
+Por ejemplo, la derivada de la función ``f(x) = 2x + 3`` es ``f'(x) = 2``.
+
+1. Identifique el patrón de diseño que debiera ocuparse para resolver el problema descrito.
+2. Dibuje un diagrama UML de su solución propuesta.
+3. Implemente la solución propuesta.
+4. Suponga ahora que quiere agregar la capacidad de realizar otras operaciones sobre las funciones 
+  (como integración, por ejemplo). 
+  ¿Cómo afectaría esto su solución actual?
+  Plantee una solución que de flexibilidad a la calculadora para agregar nuevas operaciones de 
+  manera extensible.
+  <!-- Composite + Visitor -->
 
 ## 10. Sistema monitor de clima
 <!-- Adapter -->
