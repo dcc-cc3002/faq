@@ -1139,4 +1139,3 @@ class IntGene(val dna: Int) extends Gene[...] {
   `Gene[DNA, G]` funcione correctamente?
   *Hint: Piense en cómo utilizar Curiously Recurring Template Pattern (CRTP) para resolver el problema.*
 3. Complete la implementación de las clases `BoolGene` e `IntGene` para que funcionen correctamente.
-4. 
