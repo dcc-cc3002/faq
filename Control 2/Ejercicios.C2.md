@@ -920,11 +920,11 @@ import scala.io.StdIn.readLine
 object Main {
   def main(args: Array[String]): Unit = {
     while (true){
-      val input = readLine("Enter a number (or anything else to exit): ")
+      val lo = readLine("Enter a number for the lower bound: ")
       // If all characters are digits then the input is an integer
-      if (input.forall(_.isDigit)) {
-        val number = input.toInt
-        // Complete exercise here
+      if (lo.forall(_.isDigit)) {
+        val loNumber = lo.toInt
+        // Implement the rest of the program here
       } else {
         return
       }
