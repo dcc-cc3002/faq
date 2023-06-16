@@ -1038,7 +1038,8 @@ trait Stack[A] {
 
 ### 1.2.
 
-Considere la interfaz genérica `Either[A, B]` que representa un valor de uno de dos tipos posibles:
+Considere la interfaz genérica `Either[A, B]` que representa un valor de uno de dos tipos posibles
+(el valor puede ser de tipo `A` **o** de tipo `B`):
 
 ```scala
 trait Either[A, B] {
