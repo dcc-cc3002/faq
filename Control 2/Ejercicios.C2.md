@@ -21,6 +21,9 @@ Tabla de contenidos
     - [2. Manejo de usuarios desconocidos](#2-manejo-de-usuarios-desconocidos)
 - [3. Creación Personalizada de Documentos](#3-creación-personalizada-de-documentos)
     - [4. Sistema de pagos](#4-sistema-de-pagos)
+    - [5. Máquina de Dulces](#5-máquina-de-dulces)
+    - [6. Monitoreo del Stock de Productos](#6-monitoreo-del-stock-de-productos)
+    - [7. Simulador de Bosques](#7-simulador-de-bosques)
   - [10. Sistema monitor de clima](#10-sistema-monitor-de-clima)
 
 Parte 1: Patrones de diseño
@@ -645,9 +648,74 @@ o efectivo, el sistema de pago no necesita tener conocimiento de la forma en que
 
 *Hint: Implemente su solución de tal forma que todos los tipos de pago implementen la __misma interfaz__*
 
+### 5. Máquina de Dulces
 <!-- 5 State -->
-<!-- 6 Observer -->
+
+Estás desarrollando un software para una máquina expendedora de dulces.
+La máquina tiene varias operaciones y estados, entre los cuales se incluyen "Sin Dinero", "Dinero 
+Ingresado", "Dispensando Dulce" y "Sin Dulces".
+Cada estado tiene operaciones asociadas y transiciones a otros estados.
+
+La máquina puede:
+
+- Recibir dinero: Si la máquina está en el estado "Sin Dinero", cambia al estado "Dinero 
+  Ingresado".
+- Regresar dinero: Si la máquina está en el estado "Dinero Ingresado", puede regresar el dinero y 
+  volver al estado "Sin Dinero".
+- Dispensar dulce: Si la máquina está en el estado "Dinero Ingresado", puede dispensar un dulce y 
+  volver al estado "Sin Dinero", a menos que ya no tenga dulces, en cuyo caso se moverá al estado 
+  "Sin Dulces".
+
+1. Con base en el escenario anterior, ¿qué patrón de diseño crees que debes utilizar para resolver 
+  este problema?
+2. Cree un diagrama UML para su solución propuesta.
+3. Implemente su solución en código.
+
+### 6. Monitoreo del Stock de Productos
+<!-- Observer -->
+
+Estás desarrollando un sistema de inventario para un gran almacén.
+Cada vez que un producto llega al límite de stock establecido, es necesario alertar a varios 
+departamentos (compras, ventas, logística, etc.) para que realicen las acciones correspondientes.
+
+El sistema debe permitir lo siguiente:
+
+- Registrar productos y su stock inicial.
+- Actualizar el stock de un producto.
+- Registrar departamentos interesados en un producto específico.
+- Cuando el stock de un producto llegue al límite establecido, todos los departamentos registrados 
+  deben ser notificados.
+
+1. Identifique el patrón de diseño que debiera ocuparse para resolver el problema descrito.
+2. Dibuje un diagrama UML de su solución propuesta.
+3. Implemente la solución propuesta. 
+
+*Nota: Considere que cada departamento puede tener diferentes maneras de ser notificado (por ejemplo, algunos pueden preferir un correo electrónico, mientras que otros pueden preferir una notificación en una aplicación interna). Por otro lado, es posible que en el futuro se requiera agregar más formas de notificación.*
+
+### 7. Simulador de Bosques
 <!-- 7 Flyweight -->
+
+Estás desarrollando un simulador de bosques para un estudio de cambio climático.
+En tu simulación, hay millones de árboles de diferentes tipos (como pino, roble y abeto), cada uno 
+con propiedades como color, textura y altura.
+
+Es importante destacar que aunque hay millones de árboles, el número de combinaciones únicas de las
+propiedades de los árboles (tipo, color, textura, altura) es significativamente menor.
+
+Crear una representación independiente de cada árbol en la simulación sería muy costoso en términos 
+de memoria y recursos de computación.
+Tu tarea es diseñar e implementar una solución eficiente para este problema.
+
+1. Identifique el patrón de diseño que debiera ocuparse para resolver el problema descrito.
+2. Dibuje un diagrama UML de su solución propuesta.
+3. Implemente la solución propuesta.
+4. Suponga que ahora se requiere que cada árbol tenga una posición en el mapa. 
+  ¿Cómo afectaría esto su solución actual?
+  Plantee una solución que permita agregar esta nueva funcionalidad aumentando lo menos posible el
+  consumo de recursos.
+  No es necesario implementar esta solución.
+  <!-- 2 Flyweights, el propuesto en 1 y otro para la posición. El segundo utiliza al primero. --> 
+
 <!-- 8 Singleton -->
 <!-- 9 Composite -->
 
