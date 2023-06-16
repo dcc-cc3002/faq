@@ -26,7 +26,9 @@ Tabla de contenidos
     - [7. Simulador de Bosques](#7-simulador-de-bosques)
     - [8. Gestión de Configuración Global](#8-gestión-de-configuración-global)
     - [9. Calculadora de derivadas](#9-calculadora-de-derivadas)
-  - [10. Sistema monitor de clima](#10-sistema-monitor-de-clima)
+    - [10. Sistema monitor de clima](#10-sistema-monitor-de-clima)
+    - [11. Creación de Informes](#11-creación-de-informes)
+    - [12. Interacciones de Objetos en Juegos de Estrategia](#12-interacciones-de-objetos-en-juegos-de-estrategia)
 
 Parte 1: Patrones de diseño
 ===========================
@@ -768,7 +770,7 @@ Por ejemplo, la derivada de la función ``f(x) = 2x + 3`` es ``f'(x) = 2``.
   manera extensible.
   <!-- Composite + Visitor -->
 
-## 10. Sistema monitor de clima
+### 10. Sistema monitor de clima
 <!-- Adapter -->
 
 Asumamos que tenemos un sistema monitor de clima que obtiene datos de diferentes sensores de 
@@ -782,5 +784,46 @@ nuestra interfaz existente.
 2. Dibuje el diagrama de clases (UML) de la solución.
 3. Implemente la solución en Scala.
 
+### 11. Creación de Informes
 <!-- 11 Template -->
+
+Estás trabajando en un sistema de información empresarial que necesita generar varios tipos de 
+informes.
+Cada informe tiene una estructura similar, pero los datos y la presentación pueden variar 
+dependiendo del tipo de informe (por ejemplo, un informe financiero frente a un informe de ventas).
+
+Todos los informes siguen el mismo proceso general: recolección de datos, análisis de los datos, y 
+finalmente la presentación de los datos.
+Sin embargo, cada uno de estos pasos puede variar dependiendo del tipo específico del informe.
+
+Tu tarea es diseñar e implementar una solución que proporcione una estructura común para generar 
+estos informes, pero que permita a cada tipo de informe definir su propia implementación para la 
+recolección de datos, el análisis y la presentación.
+
+1. Identifique el patrón de diseño que debiera ocuparse para resolver el problema descrito.
+2. Dibuje un diagrama UML de su solución propuesta.
+3. Implemente la solución propuesta.
+
+### 12. Interacciones de Objetos en Juegos de Estrategia
 <!-- 12 Double Dispatch -->
+
+Estás desarrollando un juego de estrategia en tiempo real donde varios tipos de unidades militares 
+pueden interactuar entre sí. 
+Las unidades tienen diferentes habilidades y comportamientos dependiendo del tipo de unidad con la 
+que interactúan.
+
+Por ejemplo, la unidad "Infantería" puede atacar a otra unidad "Infantería" con un cuchillo, 
+mientras que si la misma unidad "Infantería" interactúa con la unidad "Tanque", usaría una granada 
+antitanque.
+En el caso de la unidad "Avión", si ataca a "Infantería" realiza un ataque aéreo, pero si ataca a 
+otra unidad "Avión" se produce una batalla aérea.
+
+Tu tarea es diseñar e implementar una solución que permita manejar estas interacciones de manera 
+eficiente y sin tener que verificar el tipo de cada unidad cada vez que una interacción se lleva a 
+cabo.
+
+1. Identifique el patrón de diseño que debiera ocuparse para resolver el problema descrito.
+2. Dibuje un diagrama UML de su solución propuesta.
+3. Implemente la solución propuesta.
+
+*Nota: Asegúrate de que tu diseño permita agregar fácilmente nuevos tipos de unidades e interacciones en el futuro.*
