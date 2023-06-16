@@ -43,6 +43,17 @@ Tabla de contenidos
     - [5.3.](#53)
     - [5.4.](#54)
     - [5.5.](#55)
+- [Parte 3: Generics](#parte-3-generics)
+  - [Ejercicio 1: Clases Genéricas](#ejercicio-1-clases-genéricas)
+    - [1.1.](#11)
+    - [1.2.](#12)
+  - [Ejercicio 2: Varianza](#ejercicio-2-varianza)
+  - [Ejercicio 3: Type Constraints](#ejercicio-3-type-constraints)
+    - [1. Caja de elementos](#1-caja-de-elementos)
+    - [2. Ordenación de elementos](#2-ordenación-de-elementos)
+    - [3. Método genérico para listas](#3-método-genérico-para-listas)
+    - [4. Veterinario](#4-veterinario)
+  - [Ejercicio 4: Curiously Recurring Template Pattern](#ejercicio-4-curiously-recurring-template-pattern)
 
 Parte 1: Patrones de diseño
 ===========================
@@ -999,3 +1010,133 @@ def foo(): Int = {
 
 println(foo())
 ```
+
+Parte 3: Generics
+=================
+
+Ejercicio 1: Clases Genéricas
+-----------------------------
+
+### 1.1.
+
+Considere la interfaz genérica `Stack[A]` que representa una pila de elementos de tipo `A`:
+
+```scala
+trait Stack[A] {
+  def push(x: A): Unit
+  def pop(): A
+  def peek: A
+  def isEmpty: Boolean
+}
+```
+
+1. Implemente una clase `ListStack[A]` que implemente la interfaz `Stack[A]` utilizando una lista
+  enlazada.
+  ¿Qué patrón de diseño utilizaría para implementar una lista enlazada?
+  *Hint: Piense cómo representar el final de la lista.*
+2. ¿Qué tipo de varianza debiera tener la interfaz `Stack[A]`? Justifique su respuesta.
+
+### 1.2.
+
+Considere la interfaz genérica `Either[A, B]` que representa un valor de uno de dos tipos posibles:
+
+```scala
+trait Either[A, B] {
+  def isLeft: Boolean
+  def isRight: Boolean
+  def left: A
+  def right: B
+}
+```
+
+1. Implemente las clases `Left[A, B]` y `Right[A, B]` que implementan la interfaz `Either[A, B]` y
+  representan valores de los tipos `A` y `B` respectivamente.
+  Si se llama al método `left` en un valor `Right`, o al método `right` en un valor `Left`, se debe
+  arrojar una excepción `NoSuchElementException`.
+2. ¿Qué tipo de varianza debiera tener la interfaz `Either[A, B]`? Justifique su respuesta.
+
+Ejercicio 2: Varianza
+---------------------
+
+Señale si las siguientes afirmaciones son verdaderas o falsas, y justifique su respuesta:
+
+1. Si `A` es subtipo de `B`, entonces `List[A]` es subtipo de `List[B]`.
+2. Si `A` es co-variante, entonces `List[A]` es subtipo de `List[Any]`.
+3. Si `A` es subtipo de `B`, y `B` es co-variante, entonces `A` es co-variante.
+4. Si `A` es subtipo de `B` y `B` es invariante, entonces `List[B]` es subtipo de `List[A]`.
+5. Si `A` es subtipo de `B` y `B` es contra-variante, entonces `List[A]` es subtipo de `List[B]`.
+
+Ejercicio 3: Type Constraints
+-----------------------------
+
+En los ejercicios siguientes, `:<:` representa una relación de subtipado entre tipos.
+Diremos que `A :<: B` si `A` es subtipo de `B` o `B` es subtipo de `A`.
+
+### 1. Caja de elementos
+
+Implementa una clase `Box[T]` con un tipo genérico `T` que contenga un elemento del tipo `T`.
+Agrega un método `replace[A :<: T](nuevoElemento: A): Box[A]` que acepte un nuevo elemento del 
+tipo `A` y retorne una nueva caja con el nuevo elemento.
+
+¿Qué relación de subtipado deben tener `A` y `T` para que el método `replace` funcione?
+
+### 2. Ordenación de elementos
+
+Crea una función `max[T :<: Ordered[T]](elementos: List[T]): T` que recibe una lista de elementos 
+del tipo `T` y retorna el máximo elemento.
+
+¿Qué relación de subtipado deben tener `T` y `Ordered[T]` para que la función `max` funcione?
+
+### 3. Método genérico para listas
+
+Implementa una función `último[T](lista: List[T]): T` que retorne el último elemento de la lista.
+Luego, extiende la funcionalidad para permitir que el método trabaje con cualquier subtipo de 
+`List[T]`, es decir, si `U` es un subtipo de `T`, se puede pasar `List[U]`.
+
+### 4. Veterinario
+
+Supón que tienes una jerarquía de clases donde `Animal` es la superclase y tienes varias subclases como `Perro`, `Gato`, etc. 
+Define una clase `Veterinario[T :<: Gato :<: Animal]` y asegúrate de que sólo se puedan crear 
+instancias de `Veterinario[T]` donde `T` es al menos un `Gato` y a lo sumo un `Animal`.
+
+Ejercicio 4: Curiously Recurring Template Pattern
+------------------------------------------------
+
+Suponga que se desea implementar una jerarquía de clases que represente distintos tipos de
+estructuras genéticas.
+Para esto, considere la siguiente interfaz:
+  
+```scala
+trait Gene[DNA, G] {
+  val dna: DNA
+  def mutate(): G
+  def withDna(dna: DNA): G
+}
+```
+
+La interfaz `Gene` representa una estructura genética que almacena su ADN en el campo `dna`.
+El método `mutate` retorna una nueva estructura genética con una mutación aleatoria del mismo tipo
+que la estructura original.
+El método `withDna` retorna una nueva estructura genética del mismo tipo que la estructura original,
+pero con el ADN especificado.
+
+Considere las siguientes implementaciones de la interfaz `Gene`:
+
+```scala
+class BoolGene(val dna: Boolean) extends Gene[...] {
+  def mutate(): BoolGene = new BoolGene(new Random().nextBoolean())
+  def withDna(dna: Boolean): BoolGene = new BoolGene(dna)
+}
+
+class IntGene(val dna: Int) extends Gene[...] {
+  def mutate(): IntGene = new IntGene(new Random().nextInt())
+  def withDna(dna: Int): IntGene = new IntGene(dna)
+}
+```
+
+1. ¿Qué tipo de varianza debiera tener la interfaz `Gene[DNA, G]`? Justifique su respuesta.
+2. ¿Qué restricciones de tipo deben tener los parámetros `DNA` y `G` para que la interfaz 
+  `Gene[DNA, G]` funcione correctamente?
+  *Hint: Piense en cómo utilizar Curiously Recurring Template Pattern (CRTP) para resolver el problema.*
+3. Complete la implementación de las clases `BoolGene` e `IntGene` para que funcionen correctamente.
+4. 
