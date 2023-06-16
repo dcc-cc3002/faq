@@ -504,7 +504,8 @@ para toda la aplicación.
 A continuación se muestra una implementación de este servicio:
 
 ```scala
-class ConnectionService private (server: String) {
+class ConnectionService private () {
+  private var server: Option[String] = None
   
   def connect(): Unit = {
     println(s"Connecting to $server...")
@@ -512,9 +513,22 @@ class ConnectionService private (server: String) {
 }
 
 object ConnectionService {
-  private val instance = new ConnectionService("localhost")
+  private var instance: Option[ConnectionService] = None
+  private var _server: String = "localhost"
 
-  def getInstance: ConnectionService = instance
+  def server_=(newServer: String): Unit = {
+    _server = newServer
+    getInstance.server = Some(newServer)
+  }
+
+  def getInstance: ConnectionService = {
+    if (instance.isEmpty) {
+      println("Creating connection service...")
+      instance = Some(new ConnectionService())
+      instance.server = Some(_server)
+    }
+    instance.get
+  }
 }
 ```
 

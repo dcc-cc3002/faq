@@ -1,6 +1,9 @@
 # Tabla de contenidos
 
 - [Tabla de contenidos](#tabla-de-contenidos)
+- [Parte 1: Patrones de Diseño](#parte-1-patrones-de-diseño)
+  - [Ejercicio 1: Identificación de Patrones de Diseño](#ejercicio-1-identificación-de-patrones-de-diseño)
+    - [Programa 10: Servicio de Conexión](#programa-10-servicio-de-conexión)
 - [Parte 2: Excepciones](#parte-2-excepciones)
   - [Ejercicio 1: Clases de Excepciones](#ejercicio-1-clases-de-excepciones)
   - [Ejercicio 2: Checked vs Unchecked Exceptions](#ejercicio-2-checked-vs-unchecked-exceptions)
@@ -8,6 +11,25 @@
     - [4.1.](#41)
     - [4.2.](#42)
     - [4.3.](#43)
+
+Parte 1: Patrones de Diseño
+===========================
+
+Ejercicio 1: Identificación de Patrones de Diseño
+-------------------------------------------------
+
+### Programa 10: Servicio de Conexión
+
+1. **Nombre del patrón:** Singleton
+2. 
+![ConnectionService](Singleton_1.jpg)
+
+3. 
+```scala
+ConnectionService.server = "anakena.dcc.uchile.cl"
+val connectionService = ConnectionService.getInstance()
+connectionService.connect()
+```
 
 Parte 2: Excepciones
 ====================
