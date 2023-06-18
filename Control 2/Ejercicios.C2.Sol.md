@@ -11,6 +11,12 @@
     - [4.1.](#41)
     - [4.2.](#42)
     - [4.3.](#43)
+  - [Ejercicio 5: Orden de Ejecución](#ejercicio-5-orden-de-ejecución)
+    - [5.1.](#51)
+    - [5.2.](#52)
+    - [5.3.](#53)
+    - [5.4.](#54)
+    - [5.5.](#55)
 
 Parte 1: Patrones de Diseño
 ===========================
@@ -129,4 +135,50 @@ object Main {
     }
   }
 }
+```
+
+Ejercicio 5: Orden de Ejecución
+-------------------------------
+
+### 5.1.
+
+```scala
+1 -> println("A")
+2 -> throw new Exception("B")
+3 -> case e: Exception => println("C")
+4 -> println("D")
+```
+
+### 5.2.
+
+```scala
+1 -> println("A")
+2 -> throw new Exception("B")
+3 -> println("D")
+```
+
+### 5.3.
+
+```scala
+println("A")
+throw new Exception("B")
+case e: Exception => println("D")
+println("E")
+```
+
+### 5.4.
+
+```scala
+println("A")
+throw new IllegalArgumentException("B")
+case e: Exception => println("D")
+println("E")
+```
+
+### 5.5.
+
+```scala
+println("A")
+return 1
+println(foo())
 ```
