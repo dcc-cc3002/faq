@@ -7,6 +7,7 @@
 - [Parte 2: Excepciones](#parte-2-excepciones)
   - [Ejercicio 1: Clases de Excepciones](#ejercicio-1-clases-de-excepciones)
   - [Ejercicio 2: Checked vs Unchecked Exceptions](#ejercicio-2-checked-vs-unchecked-exceptions)
+  - [Ejercicio 3: Buenas prácticas](#ejercicio-3-buenas-prácticas)
   - [Ejercicio 4: Manejo de Excepciones](#ejercicio-4-manejo-de-excepciones)
     - [4.1.](#41)
     - [4.2.](#42)
@@ -65,6 +66,53 @@ Las checked exceptions son aquellas que el compilador obliga a capturar o relanz
 Las unchecked exceptions son aquellas que el compilador no obliga a capturar o relanzar.
 
 En Scala no existen las checked exceptions.
+
+Ejercicio 3: Buenas prácticas
+-----------------------------
+
+**Creación de excepciones personalizadas**
+
+1. **Claridad:** Al usar excepciones personalizadas, puedes proporcionar más 
+  detalles sobre el tipo de error que ocurrió.
+  En lugar de lanzar una excepción genérica (como `RuntimeException`) con un 
+  mensaje de error, puedes lanzar una excepción con un nombre descriptivo que 
+  indique claramente qué salió mal.
+
+2. **Manejo específico:** Cuando lanzas una excepción personalizada, los 
+  llamadores pueden capturar y manejar específicamente esa excepción.
+  Esto permite a quien llama decidir cómo manejar diferentes tipos de errores de
+  una manera más controlada.
+
+3. **Documentación:** Las excepciones personalizadas sirven como una forma de
+  documentación.
+  Al mirar la lista de excepciones personalizadas en tu código, puedes obtener
+  una comprensión rápida de los diferentes tipos de errores que pueden ocurrir.
+
+**Atrapar excepciones de tipo `Exception`**
+
+1. **Demasiado amplio:** `Exception` es la superclase de todas las excepciones
+  (incluyendo ``Error``, que son excepciones que no deberían ser capturadas). 
+  Atrapar `Exception` significa que estás atrapando todas las excepciones, 
+  incluidas las que podrías no esperar ni saber cómo manejar adecuadamente.
+  Esto puede ocultar errores y hacer que el diagnóstico de problemas sea más
+  difícil.
+
+2. **Interrupción del flujo de control:** Atrapar y manejar excepciones debe
+  hacerse solo cuando puedes manejarlas de manera significativa.
+  Si estás atrapando todas las excepciones, estás esencialmente diciendo que tu
+  código sabe cómo manejar cualquier tipo de error que pueda ocurrir, lo cual es
+  poco probable y puede llevar a comportamientos inesperados.
+
+3. **Pobre diseño:** Atrapar `Exception` es a menudo un signo de un diseño
+  pobre.
+  En lugar de entender y manejar las condiciones de error específicas, estás
+  utilizando un enfoque de "*one size fits all*" que puede ser difícil de
+  mantener y extender.
+
+Por estas razones, es una mejor práctica capturar solo las excepciones que sabes
+cómo manejar y dejar que las excepciones que no puedes manejar se propaguen
+hacia arriba para que puedan manejarse en un nivel más alto o se informen como
+errores no recuperables.
 
 Ejercicio 4: Manejo de Excepciones
 ----------------------------------
