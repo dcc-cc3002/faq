@@ -3,6 +3,7 @@
 - [Tabla de contenidos](#tabla-de-contenidos)
 - [Parte 1: Patrones de Diseño](#parte-1-patrones-de-diseño)
   - [Ejercicio 1: Identificación de Patrones de Diseño](#ejercicio-1-identificación-de-patrones-de-diseño)
+    - [Programa 5: Interacción entre personajes](#programa-5-interacción-entre-personajes)
     - [Programa 10: Servicio de Conexión](#programa-10-servicio-de-conexión)
 - [Parte 2: Excepciones](#parte-2-excepciones)
   - [Ejercicio 1: Clases de Excepciones](#ejercicio-1-clases-de-excepciones)
@@ -25,13 +26,19 @@ Parte 1: Patrones de Diseño
 Ejercicio 1: Identificación de Patrones de Diseño
 -------------------------------------------------
 
+### Programa 5: Interacción entre personajes
+
+1. **Nombre del patrón:** Double Dispatch
+2. 
+![Personajes](DD.png)
+
 ### Programa 10: Servicio de Conexión
 
 1. **Nombre del patrón:** Singleton
 2. 
 ![ConnectionService](Singleton_1.jpg)
 
-3. 
+1. 
 ```scala
 ConnectionService.server = "anakena.dcc.uchile.cl"
 val connectionService = ConnectionService.getInstance()
