@@ -4,6 +4,7 @@
 - [Parte 1: Patrones de Diseño](#parte-1-patrones-de-diseño)
   - [Ejercicio 1: Identificación de Patrones de Diseño](#ejercicio-1-identificación-de-patrones-de-diseño)
     - [Programa 5: Interacción entre personajes](#programa-5-interacción-entre-personajes)
+    - [Programa 7: Niveles de juego](#programa-7-niveles-de-juego)
     - [Programa 10: Servicio de Conexión](#programa-10-servicio-de-conexión)
 - [Parte 2: Excepciones](#parte-2-excepciones)
   - [Ejercicio 1: Clases de Excepciones](#ejercicio-1-clases-de-excepciones)
@@ -32,6 +33,17 @@ Ejercicio 1: Identificación de Patrones de Diseño
 2. 
 ![Personajes](DD.png)
 
+### Programa 7: Niveles de juego
+
+1. **Nombre del patrón:** State
+2. 
+![](State.png)
+3. El patrón State se utiliza en este sistema para permitir que un objeto 
+   `Player` cambie su comportamiento dinámicamente cuando su estado interno 
+   cambia.
+   En este caso, el patrón es conveniente porque permite definir transiciones
+   invalidas entre estados.
+  
 ### Programa 10: Servicio de Conexión
 
 1. **Nombre del patrón:** Singleton

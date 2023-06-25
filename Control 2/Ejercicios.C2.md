@@ -394,7 +394,7 @@ class AdvancedLevel extends GameLevel {
   override def levelDown(): GameLevel = new IntermediateLevel
 }
 
-class Player(var level: GameLevel = new BeginnerLevel) {
+class Player(private var level: GameLevel = new BeginnerLevel) {
   def levelUp(): Unit = {
     level = level.levelUp()
   }
