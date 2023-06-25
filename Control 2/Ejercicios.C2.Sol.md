@@ -6,6 +6,7 @@
     - [Programa 5: Interacción entre personajes](#programa-5-interacción-entre-personajes)
     - [Programa 7: Niveles de juego](#programa-7-niveles-de-juego)
     - [Programa 10: Servicio de Conexión](#programa-10-servicio-de-conexión)
+    - [Programa 11: Gestión de tareas](#programa-11-gestión-de-tareas)
 - [Parte 2: Excepciones](#parte-2-excepciones)
   - [Ejercicio 1: Clases de Excepciones](#ejercicio-1-clases-de-excepciones)
   - [Ejercicio 2: Checked vs Unchecked Exceptions](#ejercicio-2-checked-vs-unchecked-exceptions)
@@ -56,6 +57,12 @@ ConnectionService.server = "anakena.dcc.uchile.cl"
 val connectionService = ConnectionService.getInstance()
 connectionService.connect()
 ```
+
+### Programa 11: Gestión de tareas
+
+1. **Nombre del patrón:** Composite
+2. 
+![Task](Composite.png)
 
 Parte 2: Excepciones
 ====================

@@ -546,11 +546,11 @@ trait Task {
   def execute(): Unit
 }
 
-class SingleTask(name: String) extends Task {
+class SingleTask(val name: String) extends Task {
   override def execute(): Unit = println(s"Executing task: $name")
 }
 
-class TaskGroup(name: String) extends Task {
+class TaskGroup(val name: String) extends Task {
   private var tasks: List[Task] = List.empty
 
   def addTask(task: Task): Unit = tasks = tasks :+ task
@@ -562,8 +562,6 @@ class TaskGroup(name: String) extends Task {
   }
 }
 ```
-
-In this code, we can see that there is a `Task` trait that represents a task to be performed. This can be a `SingleTask` or a `TaskGroup`, which can contain multiple `Task` objects. 
 
 En este código, podemos ver que hay un rasgo `Task` que representa una tarea a realizar.
 Esto puede ser una `SingleTask` o un `TaskGroup`, que puede contener múltiples objetos `Task`.
