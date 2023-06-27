@@ -22,6 +22,9 @@
     - [5.3.](#53)
     - [5.4.](#54)
     - [5.5.](#55)
+- [Parte 3: Generics](#parte-3-generics)
+  - [Ejercicio 3: Type Constraints](#ejercicio-3-type-constraints)
+    - [2. Ordenación de elementos](#2-ordenación-de-elementos)
 
 Parte 1: Patrones de Diseño
 ===========================
@@ -262,4 +265,23 @@ println("E")
 println("A")
 return 1
 println(foo())
+```
+
+Parte 3: Generics
+=================
+
+Ejercicio 3: Type Constraints
+-----------------------------
+
+### 2. Ordenación de elementos
+
+```scala
+def max[T <: Ordered[T]](elementos: List[T]): T = {
+  if (elementos.isEmpty) throw new IllegalArgumentException("Lista vacía")
+  else if (elementos.size == 1) elementos.head
+  else {
+    val maximo = max(elementos.tail)
+    if (elementos.head > maximo) elementos.head else maximo
+  }
+}
 ```
