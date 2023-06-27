@@ -199,6 +199,7 @@ En este escenario:
 1. ¿Qué patrón de diseño se puede aplicar para resolver el problema?
 2. ¿Puede dibujar un diagrama UML que represente la relación entre las diferentes clases e 
   interfaces?
+
 ### Programa 3: Compartir Recursos en una Galería de Arte
 
 Eres parte del equipo de desarrollo de una aplicación para una galería de arte. 

@@ -3,6 +3,7 @@
 - [Tabla de contenidos](#tabla-de-contenidos)
 - [Parte 1: Patrones de Diseño](#parte-1-patrones-de-diseño)
   - [Ejercicio 1: Identificación de Patrones de Diseño](#ejercicio-1-identificación-de-patrones-de-diseño)
+    - [Programa 2: Control de acceso](#programa-2-control-de-acceso)
     - [Programa 5: Interacción entre personajes](#programa-5-interacción-entre-personajes)
     - [Programa 7: Niveles de juego](#programa-7-niveles-de-juego)
     - [Programa 10: Servicio de Conexión](#programa-10-servicio-de-conexión)
@@ -27,6 +28,12 @@ Parte 1: Patrones de Diseño
 
 Ejercicio 1: Identificación de Patrones de Diseño
 -------------------------------------------------
+
+### Programa 2: Control de acceso
+
+1. **Nombre del patrón:** Proxy
+2. 
+![Control de acceso](Proxy.png)
 
 ### Programa 5: Interacción entre personajes
 
