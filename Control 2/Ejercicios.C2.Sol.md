@@ -25,6 +25,7 @@
 - [Parte 3: Generics](#parte-3-generics)
   - [Ejercicio 3: Type Constraints](#ejercicio-3-type-constraints)
     - [2. Ordenación de elementos](#2-ordenación-de-elementos)
+  - [Ejercicio 4: Curiously Recurring Template Pattern](#ejercicio-4-curiously-recurring-template-pattern)
 
 Parte 1: Patrones de Diseño
 ===========================
@@ -283,5 +284,27 @@ def max[T <: Ordered[T]](elementos: List[T]): T = {
     val maximo = max(elementos.tail)
     if (elementos.head > maximo) elementos.head else maximo
   }
+}
+```
+
+Ejercicio 4: Curiously Recurring Template Pattern
+------------------------------------------------
+
+1. ``DNA`` debe ser invariante ya que se ocupa como input y output de la 
+  interfaz ``Gene``.
+  ``G`` debe ser covariante ya que sólo se ocupa como output de la interfaz 
+  ``Gene``.
+2. ``DNA`` no necesita restricciones de tipo.
+  ``G`` debe ser subtipo de ``Gene[DNA, G]``.
+3. 
+```scala
+class BoolGene(val dna: Boolean) extends Gene[Boolean, BoolGene] {
+  def mutate(): BoolGene = new BoolGene(new Random().nextBoolean())
+  def withDna(dna: Boolean): BoolGene = new BoolGene(dna)
+}
+
+class IntGene(val dna: Int) extends Gene[Int, IntGene] {
+  def mutate(): IntGene = new IntGene(new Random().nextInt())
+  def withDna(dna: Int): IntGene = new IntGene(dna)
 }
 ```
