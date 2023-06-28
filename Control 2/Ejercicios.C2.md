@@ -201,6 +201,7 @@ En este escenario:
   interfaces?
 
 ### Programa 3: Compartir Recursos en una Galería de Arte
+<!-- Flyweight -->
 
 Eres parte del equipo de desarrollo de una aplicación para una galería de arte. 
 La aplicación necesita representar miles de pinturas, muchas de las cuales comparten ciertos 
@@ -236,6 +237,7 @@ class Artwork(val name: String, private val attributes: ArtworkAttributes) {
 2. Dibuja un diagrama UML que refleje el diseño de esta implementación.
 3. Escribe un programa de ejemplo que utilice la clase `ArtworkFactory` para crear varias pinturas, 
   algunas de las cuales comparten atributos.
+
 ### Programa 4: Sistema de subastas
 <!-- Observer -->
 
@@ -328,6 +330,7 @@ class Mage extends Character {
 2. Dibuje el diagrama de clases (UML) del programa.
 
 ### Programa 6: Creación de Pinceles
+<!-- Factory Method -->
 
 Considera el siguiente código en Scala:
 
@@ -365,6 +368,7 @@ En este sistema, diferentes tipos de kits de arte necesitan crear diferentes tip
 2. Dibuja un diagrama UML del sistema.
 
 ### Programa 7: Niveles de juego
+<!-- State -->
 
 Considere el siguiente fragmento de código, que representa a un jugador progresando a través de los 
 niveles de un juego.
@@ -452,6 +456,7 @@ class NumericDataProcessor extends DataProcessor {
 2. Dibuje un diagrama UML del sistema.
 
 ### Programa 9: Operaciones Extensibles en Archivos
+<!-- Visitor -->
 
 Eres un desarrollador trabajando en una aplicación de manejo de archivos.
 En la aplicación, hay diferentes tipos de archivos, y se espera que en el futuro se puedan agregar 
@@ -495,7 +500,9 @@ class DeleteOperation extends FileOperation {
 
 1. ¿Qué patrón de diseño se está utilizando en este fragmento de código?
 2. Dibuja un diagrama UML que refleje el diseño de esta implementación.
+
 ### Programa 10: Servicio de Conexión
+<!-- Singleton -->
 
 Considere un sistema que requiere de un servicio de conexión a un servidor.
 Dado que la creación de esta conexión es costosa en términos de recursos, y el hecho de que no se 
@@ -539,6 +546,7 @@ object ConnectionService {
   servidor.
 
 ### Programa 11: Gestión de tareas
+<!-- Composite -->
 
 Considere el siguiente fragmento de código, que representa un sistema para administrar una lista de tareas:
 
@@ -647,6 +655,7 @@ de usuario, "N/A" para el correo electrónico, etc.).
 3. Implemente su solución en código.
 
 ### 3. Creación Personalizada de Documentos
+<!-- Factory Method -->
 
 Te encuentras trabajando en una aplicación de procesamiento de texto.
 Esta aplicación puede manejar diferentes tipos de documentos como documentos de texto (.txt), 

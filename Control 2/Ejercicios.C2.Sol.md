@@ -23,6 +23,8 @@
     - [5.4.](#54)
     - [5.5.](#55)
 - [Parte 3: Generics](#parte-3-generics)
+  - [Ejercicio 1: Clases Genéricas](#ejercicio-1-clases-genéricas)
+    - [1.2.](#12)
   - [Ejercicio 2: Varianza](#ejercicio-2-varianza)
   - [Ejercicio 3: Type Constraints](#ejercicio-3-type-constraints)
     - [2. Ordenación de elementos](#2-ordenación-de-elementos)
@@ -272,6 +274,49 @@ println(foo())
 Parte 3: Generics
 =================
 
+Ejercicio 1: Clases Genéricas
+-----------------------------
+
+### 1.2.
+
+Considere la interfaz genérica `Either[A, B]` que representa un valor de uno de dos tipos posibles
+(el valor puede ser de tipo `A` **o** de tipo `B`):
+
+```scala
+trait Either[A, B] {
+  def isLeft: Boolean
+  def isRight: Boolean
+  def left: A
+  def right: B
+}
+```
+
+1. 
+```scala
+trait Either[+A, +B] {
+  def isLeft: Boolean
+  def isRight: Boolean
+  def left: A
+  def right: B
+}
+
+class Left[+A, +B](value: A) extends Either[A, B] {
+  def isLeft = true
+  def isRight = false
+  def left = value
+  def right = throw new NoSuchElementException("Called right on a Left value")
+}
+
+class Right[+A, +B](value: B) extends Either[A, B] {
+  def isLeft = false
+  def isRight = true
+  def left = throw new NoSuchElementException("Called left on a Right value")
+  def right = value
+}
+```
+2. `A` y `B` son co-variantes porque las implementaciones de ``Either`` producen
+  (retornan) valores de tipo `A` y `B`, pero no los consumen (no los reciben).
+
 Ejercicio 2: Varianza
 ---------------------
 
@@ -286,11 +331,11 @@ Recordando la definición de varianza:
 1. Si `A` es co-variante, entonces `List[A]` es subtipo de `List[Any]`.
   R: Verdadero, si `A` es co-variante, entonces `List[A]` es subtipo de `List[B]` 
   para cualquier `B` que sea super-tipo de `A`.
-2. Si `A` es subtipo de `B`, y `B` es co-variante, entonces `A` es co-variante.
+1. Si `A` es subtipo de `B`, y `B` es co-variante, entonces `A` es co-variante.
   R: Verdadero, si `B` es co-variante, entonces `A` debe ser co-variante
-4. Si `A` es subtipo de `B` y `B` es invariante, entonces `List[B]` es subtipo de `List[A]`.
+1. Si `A` es subtipo de `B` y `B` es invariante, entonces `List[B]` es subtipo de `List[A]`.
   R: Falso, si `B` es invariante, entonces `List[B]` no es subtipo de `List[A]`.
-5. Si `A` es subtipo de `B` y `B` es contra-variante, entonces `List[A]` es subtipo de `List[B]`.
+1. Si `A` es subtipo de `B` y `B` es contra-variante, entonces `List[A]` es subtipo de `List[B]`.
   R: Falso, si `B` es contra-variante, entonces `List[B]` es subtipo de `List[A]`.
 
 Ejercicio 3: Type Constraints
