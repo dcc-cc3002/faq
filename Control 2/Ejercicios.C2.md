@@ -1074,11 +1074,11 @@ Ejercicio 2: Varianza
 
 Señale si las siguientes afirmaciones son verdaderas o falsas, y justifique su respuesta:
 
-1. Si `A` es subtipo de `B`, entonces `List[A]` es subtipo de `List[B]`.
-2. Si `A` es co-variante, entonces `List[A]` es subtipo de `List[Any]`.
-3. Si `A` es subtipo de `B`, y `B` es co-variante, entonces `A` es co-variante.
-4. Si `A` es subtipo de `B` y `B` es invariante, entonces `List[B]` es subtipo de `List[A]`.
-5. Si `A` es subtipo de `B` y `B` es contra-variante, entonces `List[A]` es subtipo de `List[B]`.
+1. Si `A` es subtipo de `B`, entonces `List[A]` es subtipo de `List[B]`. <!--  -->
+2. Si `A` es co-variante, entonces `List[A]` es subtipo de `List[Any]`. <!-- Verdadero
+3. Si `A` es subtipo de `B`, y `B` es co-variante, entonces `A` es co-variante. <!-- Verdadero -->
+4. Si `A` es subtipo de `B` y `B` es invariante, entonces `List[B]` es subtipo de `List[A]`. <!-- Falso -->
+5. Si `A` es subtipo de `B` y `B` es contra-variante, entonces `List[A]` es subtipo de `List[B]`. <!-- Verdadero -->
 
 Ejercicio 3: Type Constraints
 -----------------------------
