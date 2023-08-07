@@ -22,7 +22,6 @@
   - [Windows](#windows)
     - [¿Cómo instalo las herramientas?](#cómo-instalo-las-herramientas-2)
     - [¿Cuál es la diferencia entre *cmd* y *Powershell*?](#cuál-es-la-diferencia-entre-cmd-y-powershell)
-  - [Tarea 1](#tarea-1)
 
 ## Programación
 
@@ -246,14 +245,3 @@ todos los sentidos.
 
 ![](img/cmd_vs_ps.png)
 
-## Tarea 1
-
-### ¿Y la carpeta de tests? ¿Dónde está la carpeta de tests?
-
-Efectivamente, el repositorio que les entregamos no contaba con una carpeta de test. Para crearla, deben hacer click derecho en la carpeta src, y luego crear un nuevo directorio que diga lo siguiente:
-
-```
-test/scala
-```
-
-Podrán verificar que la carpeta está bien creada si el directorio scala les aparece de color verde, lo que significa que IntelliJ reconoce esa carpeta como la raíz de todos sus tests.
