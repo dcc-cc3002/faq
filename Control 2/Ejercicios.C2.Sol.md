@@ -326,17 +326,25 @@ Recordando la definición de varianza:
 - **Invariante:** Si `A` es subtipo de `B`, entonces `List[A]` no es subtipo de `List[B]`.
 - **Contra-variante:** Si `A` es subtipo de `B`, entonces `List[B]` es subtipo de `List[A]`.
 
-1. Si `A` es subtipo de `B`, entonces `List[A]` es subtipo de `List[B]`.
-  R: Falso, los generics son invariantes por defecto.
-1. Si `A` es co-variante, entonces `List[A]` es subtipo de `List[Any]`.
-  R: Verdadero, si `A` es co-variante, entonces `List[A]` es subtipo de `List[B]` 
-  para cualquier `B` que sea super-tipo de `A`.
-1. Si `A` es subtipo de `B`, y `B` es co-variante, entonces `A` es co-variante.
-  R: Verdadero, si `B` es co-variante, entonces `A` debe ser co-variante
-1. Si `A` es subtipo de `B` y `B` es invariante, entonces `List[B]` es subtipo de `List[A]`.
-  R: Falso, si `B` es invariante, entonces `List[B]` no es subtipo de `List[A]`.
-1. Si `A` es subtipo de `B` y `B` es contra-variante, entonces `List[A]` es subtipo de `List[B]`.
-  R: Falso, si `B` es contra-variante, entonces `List[B]` es subtipo de `List[A]`.
+1. **Si `S` es subtipo de `T`, entonces `List[S]` es subtipo de `List[T]`.**  
+   **Respuesta: Falso.**  
+   Justificación: En Scala, las listas (`List`) son invariantes por defecto. Esto significa que aunque `S` sea un subtipo de `T`, `List[S]` no se considera automáticamente un subtipo de `List[T]`. La invarianza implica que para cada tipo diferente `T`, hay un tipo completamente distinto `List[T]` sin una relación de subtipo entre ellos.
+
+2. **Si `A` es co-variante en `T`, entonces `A[T]` es subtipo de `A[Any]`.**  
+   **Respuesta: Verdadero.**  
+   Justificación: La covarianza, indicada por `+T` en Scala, establece que si `T` es un subtipo de `U`, entonces `A[T]` es un subtipo de `A[U]`. Por lo tanto, si `A` es co-variante en `T`, `A[T]` será un subtipo de `A[Any]`, dado que `Any` es un supertipo de todos los tipos en Scala.
+
+3. **Si `A` es subtipo de `B`, y `B` es co-variante en `T`, entonces `A` es co-variante en `T`.**  
+   **Respuesta: Verdadero.**  
+   Justificación: Esta afirmación es verdadera ya que la covarianza de `B` en `T` se hereda a `A` a través de la relación de subtipado. Si `B` es co-variante en `T`, entonces cualquier subtipo de `B` (como `A`) también será co-variante en `T`.
+
+4. **Si `A` es subtipo de `B` y `B` es invariante en `T`, entonces `B[T]` es subtipo de `A[T]`.**  
+   **Respuesta: Falso.**  
+   Justificación: La invarianza de `B` en `T` implica que `B[T]` no tiene una relación de subtipo con cualquier otra variación de `B`, como `B[U]` o `A[T]`. La invarianza significa que cambiar el tipo parametrizado resulta en un tipo completamente diferente, sin relaciones de subtipado.
+
+5. **Si `A` es subtipo de `B` y `B` es contra-variante en `T`, entonces `A[T]` es subtipo de `B[T]`.**  
+   **Respuesta: Verdadero.**  
+   Justificación: En la contravarianza, la relación de subtipado se invierte. Si `B` es contra-variante en `T`, indicado por `-T`, y `A` es un subtipo de `B`, entonces `A[T]` sería un subtipo de `B[T]`. En contravarianza, si `T` es un subtipo de `U`, entonces `A[U]` sería un subtipo de `A[T]`.
 
 Ejercicio 3: Type Constraints
 -----------------------------
