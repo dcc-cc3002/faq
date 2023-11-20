@@ -365,21 +365,32 @@ def max[T <: Ordered[T]](elementos: List[T]): T = {
 Ejercicio 4: Curiously Recurring Template Pattern
 ------------------------------------------------
 
-1. ``DNA`` debe ser invariante ya que se ocupa como input y output de la 
-  interfaz ``Gene``.
-  ``G`` debe ser covariante ya que sólo se ocupa como output de la interfaz 
-  ``Gene``.
-2. ``DNA`` no necesita restricciones de tipo.
-  ``G`` debe ser subtipo de ``Gene[DNA, G]``.
-3. 
-```scala
-class BoolGene(val dna: Boolean) extends Gene[Boolean, BoolGene] {
-  def mutate(): BoolGene = new BoolGene(new Random().nextBoolean())
-  def withDna(dna: Boolean): BoolGene = new BoolGene(dna)
-}
+1. **Explicación de Varianza**:
+    - `DNA` debe ser invariante ya que se utiliza tanto como tipo de entrada (en el método `withDna`) como de salida (en la propiedad `dna`). Esto asegura que el tipo de `DNA` sea consistente y no varíe en las subclases, manteniendo la seguridad de tipos.
+    - `G` debe ser covariante porque solo se utiliza como tipo de retorno en la interfaz `Gene`. La covarianza permite que la interfaz `Gene` sea flexible para devolver subtipos de `G`, manteniendo así la consistencia de tipos en las implementaciones y permitiendo un uso más versátil de la interfaz.
 
-class IntGene(val dna: Int) extends Gene[Int, IntGene] {
-  def mutate(): IntGene = new IntGene(new Random().nextInt())
-  def withDna(dna: Int): IntGene = new IntGene(dna)
-}
-```
+2. **Restricciones de Tipo**:
+    - `DNA` no necesita restricciones de tipo adicionales.
+    - `G` debe ser un subtipo de `Gene[DNA, G]`. Esto se logra mediante el CRTP, lo que garantiza que los métodos de `Gene` devuelvan instancias del mismo tipo que la clase implementadora, proporcionando un uso seguro y predecible de estas clases.
+
+3. **Implementación de Clases**:
+    - Se recomienda el uso de un objeto compañero para `Random` para evitar la creación repetida de objetos `Random`, lo cual es más eficiente y es una práctica común en Scala.
+
+    Implementación con objeto compañero para `Random`:
+
+    ```scala
+    object RandomUtil {
+      val random = new Random()
+    }
+
+    class BoolGene(val dna: Boolean) extends Gene[Boolean, BoolGene] {
+      def mutate(): BoolGene = new BoolGene(RandomUtil.random.nextBoolean())
+      def withDna(dna: Boolean): BoolGene = new BoolGene(dna)
+    }
+
+    class IntGene(val dna: Int) extends Gene[Int, IntGene] {
+      def mutate(): IntGene = new IntGene(RandomUtil.random.nextInt())
+      def withDna(dna: Int): IntGene = new IntGene(dna)
+    }
+    ```
+
